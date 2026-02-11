@@ -13,7 +13,7 @@ const CONFIG = {
     BUSINESS_NAME: "El Sandwishazo",
     CITY: "Antofagasta",
     PHONE_E164: "+56961589674",
-    FALLBACK_IMG: "/assets/placeholder.png",
+    FALLBACK_IMG: "assets/placeholder.png", // ✅ CORREGIDO
     DELIVERY_FEE: 2000,
 };
 
@@ -27,7 +27,7 @@ const PRODUCTS = [
         category: "sandwich",
         price: 3500,
         desc: "Sándwichazo cargado con carne de res desmechada, jamón sandwich, queso mozzarella fundido, lechuga fresca, tomate, y salsa secreta Sandwishazo.",
-        img: "/assets/sandwish/burguer.png",
+        img: "assets/sandwish/burguer.png", // ✅ CORREGIDO
     },
     {
         id: "sandwichazo-especial",
@@ -36,7 +36,7 @@ const PRODUCTS = [
         category: "sandwich",
         price: 3000,
         desc: "Jamón pierna de cerdo, jamón de ave, jamonada suave, queso mozzarella, lechuga, tomate y salsa especial Sandwishazo.",
-        img: "/assets/sandwish/especial.png",
+        img: "assets/sandwish/especial.png", // ✅ CORREGIDO
     },
     {
         id: "sandwichazo-superespecial",
@@ -45,7 +45,7 @@ const PRODUCTS = [
         category: "sandwich",
         price: 3500,
         desc: "Jamón pierna ahumado, jamón acaramelado, jamonada premium, doble queso mozzarella, palta, maicitos gratinados y salsa secreta Sandwishazo.",
-        img: "/assets/sandwish/superespecial.png",
+        img: "assets/sandwish/superespecial.png", // ✅ CORREGIDO
     },
     {
         id: "sandwichazo-pavo",
@@ -54,7 +54,7 @@ const PRODUCTS = [
         category: "sandwich",
         price: 3000,
         desc: "Jamón pechuga de pavo, panceta, queso mozarella, lechuga, miel mostaza y salsa secreta Sandwishazo.",
-        img: "/assets/sandwish/pavo.png",
+        img: "assets/sandwish/pavo.png", // ✅ CORREGIDO
     },
     {
         id: "sandwichazo-ropavieja",
@@ -63,7 +63,7 @@ const PRODUCTS = [
         category: "sandwich",
         price: 3500,
         desc: "Carne de res desmechada, jamón sandwich, queso mozzarella fundido, lechuga, tomate y salsa secreta Sandwishazo.",
-        img: "/assets/sandwish/ropavieja.png",
+        img: "assets/sandwish/ropavieja.png", // ✅ CORREGIDO
     },
     {
         id: "sandwichazo-pollo",
@@ -72,7 +72,7 @@ const PRODUCTS = [
         category: "sandwich",
         price: 3000,
         desc: "Pechuga de pollo desmechada, jamón sandwich, tomate, queso mozzarella, lechuga y salsa secreta Sandwishazo.",
-        img: "/assets/sandwish/pollo.png",
+        img: "assets/sandwish/pollo.png", // ✅ CORREGIDO
     },
     {
         id: "sandwichazo-hawaiano",
@@ -81,7 +81,7 @@ const PRODUCTS = [
         category: "sandwich",
         price: 3000,
         desc: "Jamón pierna de cerdo, jamón pechuga de pollo, piña caramelizada, queso mozzarella y salsa secreta Sandwishazo.",
-        img: "/assets/sandwish/hawaiano.png",
+        img: "assets/sandwish/hawaiano.png", // ✅ CORREGIDO
     },
     {
         id: "sandwichazo-crunch",
@@ -90,7 +90,7 @@ const PRODUCTS = [
         category: "sandwich",
         price: 3000,
         desc: "Pechuga de pollo apanado, miel mostaza, tomate, lechuga, queso mozzarella y salsa secreta Sandwishazo.",
-        img: "/assets/sandwish/crunch.png",
+        img: "assets/sandwish/crunch.png", // ✅ CORREGIDO
     },
 
     // ===== COMBOS =====
@@ -101,7 +101,7 @@ const PRODUCTS = [
         category: "combos",
         price: 3500,
         desc: "Sandwichazo Burguer + papas naturales + bebida personal.",
-        img: "/assets/combos/comboburguer.png",
+        img: "assets/combos/comboburguer.png", // ✅ CORREGIDO
     },
     {
         id: "combo-especial",
@@ -110,7 +110,7 @@ const PRODUCTS = [
         category: "combos",
         price: 3000,
         desc: "Sandwichazo Especial + papas naturales + bebida personal.",
-        img: "/assets/combos/especial.png",
+        img: "assets/combos/especial.png", // ✅ CORREGIDO
     },
     {
         id: "combo-superespecial",
@@ -119,7 +119,7 @@ const PRODUCTS = [
         category: "combos",
         price: 3500,
         desc: "Sandwichazo super especial + papas naturales + bebida personal.",
-        img: "/assets/combos/superespecial.png",
+        img: "assets/combos/superespecial.png", // ✅ CORREGIDO
     },
     {
         id: "combo-pavo",
@@ -128,7 +128,7 @@ const PRODUCTS = [
         category: "combos",
         price: 3000,
         desc: "Sandwichazo Pavo + papas naturales + bebida personal.",
-        img: "/assets/combos/pavo.png",
+        img: "assets/combos/pavo.png", // ✅ CORREGIDO
     },
     {
         id: "combo-ropavieja",
@@ -137,7 +137,7 @@ const PRODUCTS = [
         category: "combos",
         price: 3500,
         desc: "Sandwichazo Ropa Vieja + papas naturales + bebida personal.",
-        img: "/assets/combos/ropavieja.png",
+        img: "assets/combos/ropavieja.png", // ✅ CORREGIDO
     },
     {
         id: "combo-pollo",
@@ -146,7 +146,7 @@ const PRODUCTS = [
         category: "combos",
         price: 3000,
         desc: "Sandwichazo Pollo + papas naturales + bebida personal.",
-        img: "/assets/combos/pollo.png",
+        img: "assets/combos/pollo.png", // ✅ CORREGIDO
     },
     {
         id: "combo-hawaiano",
@@ -155,7 +155,7 @@ const PRODUCTS = [
         category: "combos",
         price: 3000,
         desc: "Sandwichazo Hawaiano + papas naturales + bebida personal.",
-        img: "/assets/combos/hawaiano.png",
+        img: "assets/combos/hawaiano.png", // ✅ CORREGIDO
     },
     {
         id: "combo-crunch",
@@ -164,7 +164,7 @@ const PRODUCTS = [
         category: "combos",
         price: 3000,
         desc: "Sandwichazo Crunch + papas naturales + bebida personal.",
-        img: "/assets/combos/crunch.png",
+        img: "assets/combos/crunch.png", // ✅ CORREGIDO
     },
 ];
 
@@ -328,7 +328,6 @@ function renderMenu() {
         )
         .join("");
 
-    // ✅ SIEMPRE pide tamaño (sandwich y combos)
     grid.onclick = async (e) => {
         const btn = e.target.closest("[data-add]");
         if (!btn) return;
@@ -340,7 +339,6 @@ function renderMenu() {
         addToCart(idProducto, size);
     };
 
-    // ✅ refresca AOS cada vez que re-renderizas el menú
     if (window.AOS) AOS.refreshHard();
 }
 
@@ -665,12 +663,13 @@ function openWhatsApp(withCart) {
         Swal.fire({
             icon: "warning",
             title: "Falta tu WhatsApp",
-            text: "Edita CONFIG.PHONE_E164 en /js/app.js (ej: +56912345678).",
+            text: "Edita CONFIG.PHONE_E164 en js/app.js (ej: +56912345678).",
         });
         return;
     }
 
-    const msg = withCart && carrito.size > 0 ?
+    const msg =
+        withCart && carrito.size > 0 ?
         buildWhatsAppMessage() :
         encodeURIComponent(`Hola! Quiero pedir en ${CONFIG.BUSINESS_NAME} 🥪`);
 
