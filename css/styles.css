@@ -1,0 +1,754 @@
+/* =========================================
+   EL SANDWICHAZO - styles.css (COMPLETO)
+   ✅ Layout pro + responsive
+   ✅ Festín centrado (móvil + desktop)
+   ✅ Explosión suave (MUY grande + lenta)
+   ✅ Botón WhatsApp: vibra + brilla MÁS
+========================================= */
+
+/* ===============================
+   VARIABLES + BASE
+================================ */
+:root{
+  --bg-main:#050814;
+  --glass: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.12);
+  --text:#f5f7ff;
+  --muted: rgba(245,247,255,0.70);
+  --accent:#ffc107;
+}
+
+*{ box-sizing: border-box; }
+
+body{
+  background: radial-gradient(circle at top, #0b1030, #040610);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.text-muted{ color: var(--muted) !important; }
+
+/* ✅ Si quieres ocultar el sitio mientras está el festín */
+body.app-loading{
+  overflow: hidden;
+}
+body.app-loading #siteContent{
+  visibility: hidden;
+}
+
+/* Evita saltos raros en animaciones */
+[data-aos] { will-change: transform, opacity; }
+
+/* ===============================
+   CONTENEDOR PRO
+================================ */
+.site-container{
+  max-width: 1680px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+@media (min-width: 1800px){
+  .site-container{ max-width: 1760px; }
+}
+@media (max-width: 576px){
+  .site-container{
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
+
+/* ===============================
+   NAVBAR PRO
+================================ */
+.navbar-pro{
+  background: linear-gradient(
+    90deg,
+    rgba(5, 8, 20, 0.95),
+    rgba(15, 20, 40, 0.95)
+  ) !important;
+  border-bottom: 1px solid rgba(255,193,7,0.25);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+}
+
+.brand-logo-text{
+  font-family: "Poppins", system-ui, sans-serif;
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  transition: all 0.3s ease;
+}
+.brand-logo-text:hover{
+  color: var(--accent);
+  text-shadow: 0 0 10px rgba(255,193,7,0.6);
+}
+.logo-pro{ font-size: 1.55rem; }
+@media (max-width: 576px){ .logo-pro{ font-size: 1.25rem; } }
+
+#menuDropdownBtn{
+  border-radius: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  transition: all .25s ease;
+}
+#menuDropdownBtn:hover{
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 0 12px rgba(255,193,7,0.4);
+}
+
+/* ===============================
+   BOTONES
+================================ */
+.btn-warning{
+  font-weight: 800;
+  box-shadow: 0 0 12px rgba(255,193,7,.45);
+}
+.btn-warning:hover{
+  box-shadow: 0 0 20px rgba(255,193,7,.75);
+}
+.btn-outline-light:hover{
+  background: rgba(255,255,255,.08);
+}
+
+/* ===============================
+   BOTÓN WHATSAPP NEÓN EXTREMO 🔥
+================================ */
+
+.btn-wa-pro{
+  border-radius: 14px;
+  padding: 6px 18px;
+  font-weight: 950;
+  position: relative;
+  transform: translateZ(0);
+  transition: all .25s ease;
+
+  background: linear-gradient(135deg,#ffd54f,#ffc107);
+
+  /* 🔥 neón fuerte permanente */
+  box-shadow:
+    0 0 10px #ffc107,
+    0 0 25px #ffc107,
+    0 0 45px rgba(255,193,7,.9),
+    0 0 75px rgba(255,193,7,.6);
+}
+
+/* Hover más intenso */
+.btn-wa-pro:hover{
+  transform: translateY(-2px) scale(1.08);
+  box-shadow:
+    0 0 15px #fff176,
+    0 0 35px #ffc107,
+    0 0 65px rgba(255,193,7,1),
+    0 0 120px rgba(255,193,7,.8);
+}
+
+/* Activación animación (agregas class="wa-attention" desde JS) */
+.btn-wa-pro.wa-attention{
+  animation: waWiggle 2.6s infinite;
+}
+
+/* Vibración */
+@keyframes waWiggle{
+  0%, 68%, 100% { transform: translateY(0) rotate(0deg); }
+  70% { transform: translateY(-2px) rotate(-3deg); }
+  72% { transform: translateY(2px) rotate(3deg); }
+  74% { transform: translateY(-4px) rotate(-4deg); }
+  76% { transform: translateY(4px) rotate(4deg); }
+  78% { transform: translateY(-2px) rotate(-2deg); }
+  80% { transform: translateY(0) rotate(0deg); }
+}
+
+/* 🔥 AURA NEÓN PULSANTE GIGANTE */
+.btn-wa-pro.wa-attention::after{
+  content:"";
+  position:absolute;
+  inset:-18px;
+  border-radius: 24px;
+  pointer-events:none;
+
+  background: radial-gradient(circle,
+    rgba(255,193,7,.9) 0%,
+    rgba(255,193,7,.55) 35%,
+    rgba(255,193,7,.25) 55%,
+    transparent 75%
+  );
+
+  animation: waPulse 2.6s infinite;
+  opacity:0;
+}
+
+@keyframes waPulse{
+  0%, 65%{
+    opacity:0;
+    transform:scale(.9);
+  }
+  75%{
+    opacity:1;
+    transform:scale(1.2);
+  }
+  90%{
+    opacity:0;
+    transform:scale(1.6);
+  }
+  100%{
+    opacity:0;
+    transform:scale(1.6);
+  }
+}
+
+/* ✨ Destello cruzando el botón */
+.btn-wa-pro.wa-attention::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius: 14px;
+  pointer-events:none;
+
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255,255,255,.6) 45%,
+    transparent 70%
+  );
+
+  mix-blend-mode: screen;
+  opacity:0;
+
+  animation: waShine 2.6s infinite;
+}
+
+@keyframes waShine{
+  0%, 60%{
+    opacity:0;
+    transform:translateX(-60%) skewX(-20deg);
+  }
+  75%{
+    opacity:.9;
+    transform:translateX(10%) skewX(-20deg);
+  }
+  85%{
+    opacity:0;
+    transform:translateX(60%) skewX(-20deg);
+  }
+  100%{
+    opacity:0;
+    transform:translateX(60%) skewX(-20deg);
+  }
+}
+/* ===============================
+   PAGE WRAP
+================================ */
+.page-wrap{
+  background:
+    radial-gradient(900px 300px at 20% 10%, rgba(255,193,7,0.18), transparent),
+    radial-gradient(700px 300px at 80% 20%, rgba(255,0,0,0.12), transparent);
+}
+
+/* ===============================
+   CAROUSEL PRO
+================================ */
+.carousel-section{ width: 100%; }
+.pro-carousel{
+  width: 100%;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.6);
+  position: relative;
+}
+.pro-carousel::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background: radial-gradient(80% 60% at 50% 30%, rgba(255,193,7,0.10), transparent 60%);
+}
+.carousel-img{
+  height: 360px;
+  object-fit: cover;
+}
+.carousel-indicators [data-bs-target]{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon{
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.65));
+}
+
+/* ===============================
+   GRID MENU
+================================ */
+.menu-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+  width: 100%;
+}
+
+/* ===============================
+   MENU CARDS
+================================ */
+#menu .card{
+  background: linear-gradient(180deg, var(--glass), rgba(255,255,255,.02));
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  color: var(--text);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+#menu .card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0,0,0,.60);
+}
+
+#menu .card-img-top{
+  height: 300px;
+  width: 100%;
+  object-fit: contain;
+  background: #0a0a0a;
+  padding: 8px;
+  cursor: pointer;
+  transition: transform .3s ease;
+  border-bottom: 1px solid rgba(0,0,0,.05);
+}
+#menu .card:hover .card-img-top{ transform: scale(1.06); }
+
+#imageModalImg{
+  max-height: 70vh;
+  object-fit: contain;
+}
+
+/* ===============================
+   CARRITO PRO
+================================ */
+.cart-sticky-yellow{ position: sticky; top: 90px; }
+
+.cart-wrap{
+  border-radius: 22px;
+  padding: 10px;
+  background: rgba(255,193,7,0.12);
+  border: 1px solid rgba(255,193,7,0.35);
+  box-shadow: 0 0 35px rgba(255,193,7,0.10);
+}
+.cart-card{
+  background: linear-gradient(180deg, var(--glass), rgba(255,255,255,.02));
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+}
+.cart-header{
+  padding: .6rem .9rem;
+  font-size: .95rem;
+  background: transparent;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+.cart-body{ padding: .9rem; }
+
+.cart-list{
+  max-height: 320px;
+  overflow: auto;
+  padding-right: 4px;
+}
+#cartList .list-group-item{
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 10px;
+  color: var(--text);
+  padding: .7rem;
+}
+
+.cart-thumb{
+  width: 78px;
+  height: 78px;
+  border-radius: 16px;
+  background: #f3f0f0;
+  object-fit: contain;
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow: 0 10px 22px rgba(0,0,0,.35);
+}
+
+.cart-card .text-muted{ color: rgba(245,247,255,0.86) !important; }
+#cartSubtotal,#deliveryFee{
+  color: #ffffff !important;
+  font-weight: 900;
+  font-size: 1.05rem;
+}
+#cartTotal{
+  color: var(--accent) !important;
+  font-weight: 950;
+  font-size: 1.18rem;
+}
+
+.cart-body > .d-flex{
+  padding: 6px 0;
+  border-bottom: 1px dashed rgba(255,255,255,0.10);
+}
+.cart-body > .d-flex:last-of-type{ border-bottom: none; }
+
+/* ===============================
+   INFO SECTION
+================================ */
+.info-section{
+  background:
+    radial-gradient(600px 200px at 20% 20%, rgba(255,193,7,0.12), transparent),
+    radial-gradient(500px 200px at 80% 30%, rgba(255,0,0,0.10), transparent),
+    linear-gradient(180deg, #050814, #040610);
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.info-card{
+  height: 100%;
+  padding: 28px 22px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(12px);
+  text-align: center;
+  transition: all .3s ease;
+  box-shadow: 0 12px 25px rgba(0,0,0,.5);
+}
+.info-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0,0,0,.7);
+  border-color: rgba(255,193,7,0.5);
+}
+
+.info-icon{
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255,193,7,0.15);
+  border: 1px solid rgba(255,193,7,0.4);
+  color: var(--accent);
+  font-size: 1.8rem;
+  box-shadow: 0 0 20px rgba(255,193,7,.25);
+}
+
+.info-card h5{
+  font-weight: 900;
+  margin-bottom: 6px;
+  letter-spacing: .5px;
+}
+.info-card p{
+  color: rgba(245,247,255,0.88);
+  font-size: .95rem;
+  margin: 0;
+}
+
+/* ===============================
+   MAPA
+================================ */
+.map-card{
+  padding: 18px 18px 14px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 25px rgba(0,0,0,.5);
+}
+
+.map-badge{
+  background: rgba(255,193,7,0.15);
+  border: 1px solid rgba(255,193,7,0.35);
+  color: rgba(245,247,255,0.95);
+  padding: 10px 12px;
+}
+
+.map-embed{
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 14px 30px rgba(0,0,0,.55);
+}
+.map-embed iframe{ display: block; width: 100%; }
+
+/* ===============================
+   FOOTER
+================================ */
+.footer-pro{
+  background: linear-gradient(180deg, #03050c, #000);
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding: 22px 0;
+  color: rgba(245,247,255,0.8);
+}
+.footer-pro p{
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.footer-pro small{
+  color: rgba(255,193,7,0.7);
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 992px){
+  .cart-sticky-yellow{ position: static; }
+  .carousel-img{ height: 300px; }
+  .menu-grid{ grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+}
+@media (max-width: 576px){
+  #menu .card-img-top{ height: 260px; }
+  .carousel-img{ height: 220px; }
+  .pro-carousel{ border-radius: 16px; }
+  .menu-grid{ grid-template-columns: 1fr; }
+  .cart-thumb{ width: 68px; height: 68px; border-radius: 14px; }
+}
+
+/* =====================================================
+   FESTÍN PRO (INTRO) - CENTRADO PERFECTO
+   ✅ MUY GRANDE + MUY LENTO (explosión)
+===================================================== */
+.festin-hero{
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
+
+  /* ✅ grid = centrado perfecto móvil/desktop */
+  display: grid;
+  place-items: center;
+
+  background:
+    radial-gradient(1200px 800px at 50% 40%, rgba(255,193,7,.22), transparent 60%),
+    radial-gradient(900px 700px at 20% 10%, rgba(255,0,0,.12), transparent 55%),
+    radial-gradient(900px 700px at 80% 90%, rgba(0,170,255,.12), transparent 55%),
+    linear-gradient(180deg, rgba(0,0,0,.94), rgba(0,0,0,.98));
+
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  overflow: hidden;
+}
+
+.festin-overlay{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+}
+
+/* Glow atrás continuo */
+.festin-hero::after{
+  content:"";
+  position:absolute;
+  width: min(760px, 94vw);
+  height: min(760px, 94vw);
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255,193,7,.26), transparent 62%);
+  filter: blur(18px);
+  animation: festinGlow 3.2s ease-in-out infinite;
+}
+
+@keyframes festinGlow{
+  0%,100%{ opacity:.65; transform: scale(1); }
+  50%{ opacity:1; transform: scale(1.10); }
+}
+
+/* CARD */
+.festin-card{
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  z-index: 2;
+
+  background: rgba(14,14,18,.94);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 26px;
+
+  padding: 22px 20px;
+  text-align: center;
+
+  box-shadow:
+    0 35px 100px rgba(0,0,0,.9),
+    0 0 50px rgba(255,193,7,.22);
+
+  opacity: 0;
+  transform: translateY(22px) scale(.92);
+  animation: festinIn .80s cubic-bezier(.18,.9,.2,1) forwards;
+}
+
+@keyframes festinIn{
+  0%{ opacity:0; transform: translateY(22px) scale(.90); }
+  65%{ opacity:1; transform: translateY(-4px) scale(1.03); }
+  100%{ opacity:1; transform: translateY(0) scale(1); }
+}
+
+/* IMAGEN */
+.festin-img{
+  width: 100%;
+  max-width: 290px;
+  margin: 0 auto 14px;
+  display: block;
+
+  border-radius: 18px;
+  background: #000;
+  border: 1px solid var(--border);
+
+  box-shadow: 0 16px 40px rgba(0,0,0,.7);
+  animation: festinFloat 2.9s ease-in-out infinite;
+}
+
+@keyframes festinFloat{
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(-9px); }
+}
+
+/* TEXTO */
+.festin-title{
+  margin: 8px 0 6px;
+  font-size: 1.35rem;
+  font-weight: 950;
+  color: #fff;
+}
+.festin-sub{
+  font-size: .98rem;
+  color: rgba(255,255,255,.78);
+}
+
+/* ===============================
+   ✅ EXPLOSIÓN SUAVE (MUY GRANDE + MUY LENTA)
+   El JS agrega: festin.classList.add("festin-hide")
+================================ */
+
+/* Se apaga el overlay con calma */
+.festin-hero.festin-hide .festin-overlay{
+  animation: overlayFade 1.35s ease forwards;
+}
+@keyframes overlayFade{
+  to{ opacity: 0; }
+}
+
+/* Explosión desde la card (aura gigante) */
+.festin-card::after{
+  content:"";
+  position:absolute;
+  inset:-24px;
+  border-radius: 34px;
+  pointer-events:none;
+  opacity:0;
+  transform: scale(.75);
+
+  background: radial-gradient(circle at 50% 55%,
+    rgba(255,193,7,.70) 0%,
+    rgba(255,193,7,.30) 28%,
+    rgba(255,90,0,.22) 45%,
+    rgba(255,255,255,.18) 55%,
+    transparent 72%
+  );
+
+  filter: blur(2px);
+}
+
+/* Activa explosión (MUY grande + lenta) */
+.festin-hero.festin-hide .festin-card::after{
+  animation: festinBoom 1.85s cubic-bezier(.12,.9,.2,1) forwards;
+}
+
+@keyframes festinBoom{
+  0%{
+    opacity: 0;
+    transform: scale(.75);
+    filter: blur(2px);
+  }
+  20%{
+    opacity: 1;
+    transform: scale(1.10);
+    filter: blur(1px);
+  }
+  60%{
+    opacity: .85;
+    transform: scale(2.60);
+    filter: blur(3px);
+  }
+  100%{
+    opacity: 0;
+    transform: scale(4.20); /* ✅ MUY grande */
+    filter: blur(6px);
+  }
+}
+
+/* La card se disuelve suave y lenta */
+.festin-hero.festin-hide .festin-card{
+  animation: festinOut 1.45s ease forwards;
+}
+
+@keyframes festinOut{
+  0%{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+  60%{
+    opacity: .5;
+    transform: translateY(10px) scale(.98);
+    filter: blur(1px);
+  }
+  100%{
+    opacity: 0;
+    transform: translateY(18px) scale(.96);
+    filter: blur(4px);
+  }
+}
+
+/* El fondo del festín se va también (lento) */
+.festin-hero.festin-hide{
+  animation: festinBackdropOut 1.55s ease forwards;
+}
+@keyframes festinBackdropOut{
+  to{
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+
+/* FLASH suave cuando entra al sitio (body.festin-flash lo agrega el JS) */
+body.festin-flash::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 999998;
+  background: radial-gradient(circle, rgba(255,193,7,.22), transparent 55%);
+  animation: flashOut .55s ease forwards;
+}
+@keyframes flashOut{
+  from{ opacity: 1; }
+  to{ opacity: 0; }
+}
+
+/* RESPONSIVE FESTÍN */
+@media(max-width:480px){
+  .festin-card{
+    max-width: 360px;
+    padding: 18px 14px;
+  }
+  .festin-img{ max-width: 240px; }
+  .festin-title{ font-size: 1.18rem; }
+  .festin-sub{ font-size: .88rem; }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .festin-card,
+  .festin-img,
+  .festin-hero::after,
+  .btn-wa-pro.wa-attention,
+  .btn-wa-pro.wa-attention::before,
+  .btn-wa-pro.wa-attention::after{
+    animation: none !important;
+    transition: none !important;
+  }
+}

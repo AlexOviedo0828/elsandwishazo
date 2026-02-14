@@ -1,0 +1,340 @@
+<!-- index.html (ORGANIZADO / CORREGIDO) -->
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>El Sandwishazo</title>
+  <meta name="description" content="Sándwiches gigantes en Antofagasta. Pide por WhatsApp." />
+
+  <!-- Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Bootstrap Icons -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    rel="stylesheet"
+  />
+
+  <!-- AOS (animaciones on scroll) -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+  />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ✅ CSS (relativo) -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<!-- ✅ Recomendado: inicia bloqueado para que el festín sea lo primero -->
+<body class="app-loading">
+
+  <!-- ✅ FESTÍN (INTRO) SIN VIDEO -->
+  <!-- ✅ aria-hidden corregido -->
+  <section class="festin-hero" id="festinHero" aria-hidden="false">
+    <div class="festin-overlay"></div>
+
+    <div class="festin-card" role="presentation">
+      <!-- ✅ ruta corregida a tu asset -->
+      <img class="festin-img" src="assets/sin-fondo.png" alt="El Sandwishazo" />
+
+      <h2 class="festin-title">¡Bienvenido al Sandwishazo!</h2>
+     <p class="festin-sub">Prepárate para un golpe de sabor.</p>
+    </div>
+  </section>
+
+  <!-- ✅ CONTENIDO DEL SITIO (para que JS lo oculte/muestre) -->
+  <div id="siteContent">
+
+    <!-- ✅ NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top navbar-pro" data-aos="fade-down">
+      <div class="container-fluid site-container py-2 d-flex align-items-center justify-content-between">
+
+        <a class="navbar-brand d-flex align-items-center gap-3" href="#">
+          <span class="brand-logo-text logo-pro">El Sandwichazo</span>
+        </a>
+
+        <div class="d-flex align-items-center gap-2">
+          <!-- Dropdown Menú -->
+          <div class="dropdown">
+            <button
+              class="btn btn-outline-light dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              id="menuDropdownBtn"
+            >
+              <i class="bi bi-grid"></i> Menú
+            </button>
+
+            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="#" data-category="all">
+                  <i class="bi bi-list"></i> Todo
+                </a>
+              </li>
+
+              <li><hr class="dropdown-divider" /></li>
+
+              <li>
+                <a class="dropdown-item" href="#" data-category="sandwich">
+                  <i class="bi bi-egg-fried"></i> Sandwich
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item" href="#" data-category="combos">
+                  <i class="bi bi-bag-heart"></i> Combos
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item" href="#" data-category="bebidas">
+                  <i class="bi bi-cup-straw"></i> Bebidas
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- WhatsApp -->
+          <a href="#" id="btnWhatsappTop" class="btn btn-warning fw-semibold btn-wa-pro">
+            <i class="bi bi-whatsapp"></i> Pedir
+          </a>
+        </div>
+
+      </div>
+    </nav>
+
+    <!-- CAROUSEL -->
+    <section class="carousel-section my-3" data-aos="fade-up">
+      <div
+        id="heroCarousel"
+        class="carousel slide carousel-fade pro-carousel"
+        data-bs-ride="carousel"
+        data-bs-interval="3500"
+        data-bs-pause="false"
+        data-bs-touch="true"
+      >
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img
+              src="assets/UN.jpg"
+              class="d-block w-100 h-100 carousel-img"
+              alt="Promo 1"
+            />
+          </div>
+
+          <div class="carousel-item">
+            <video class="d-block w-100 h-100 carousel-img" autoplay muted loop playsinline>
+              <source src="assets/SANDWISHAZO ROPA VIEJA.mp4" type="video/mp4" />
+            </video>
+          </div>
+
+          <div class="carousel-item">
+            <video class="d-block w-100 h-100 carousel-img" autoplay muted loop playsinline>
+              <source src="assets/sandwishazo.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Siguiente</span>
+        </button>
+
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAYOUT -->
+    <section class="page-wrap py-4">
+      <div class="container-fluid site-container">
+        <div class="row g-4 align-items-start">
+
+          <!-- IZQUIERDA -->
+          <div class="col-lg-8" data-aos="fade-right">
+            <main id="menu" class="mt-4">
+              <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+                <div>
+                  <h2 class="fw-bold mb-1">Menú</h2>
+                  <p class="text-muted mb-0" id="menuSubtitle"></p>
+                </div>
+              </div>
+
+              <div id="menuGrid" class="menu-grid">
+                <!-- app.js renderiza -->
+              </div>
+            </main>
+          </div>
+
+          <!-- DERECHA: CARRITO -->
+          <div class="col-lg-4" data-aos="fade-left">
+            <div class="cart-sticky-yellow">
+              <div class="cart-wrap">
+                <div class="card cart-card shadow-sm">
+                  <div class="card-header cart-header fw-bold">
+                    <i class="bi bi-cart"></i> Tu pedido
+                  </div>
+
+                  <div class="card-body cart-body">
+                    <ul class="list-group cart-list mb-2" id="cartList"></ul>
+
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                      <span class="text-muted">Subtotal:</span>
+                      <strong id="cartSubtotal">$0</strong>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                      <span class="text-muted">Despacho:</span>
+                      <strong id="deliveryFee">$0</strong>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                      <span class="text-muted">Total:</span>
+                      <strong id="cartTotal">$0</strong>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                      <button id="btnSendOrder" class="btn btn-success btn-sm">
+                        <i class="bi bi-whatsapp"></i> Enviar Pedido
+                      </button>
+
+                      <button id="btnClearCart" class="btn btn-outline-danger btn-sm">
+                        <i class="bi bi-trash"></i> Vaciar Carrito
+                      </button>
+                    </div>
+
+                    <p class="text-muted small mt-2 mb-0">
+                      *El pago y confirmación se coordinan por WhatsApp.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- INFO PRO -->
+    <section class="py-5 info-section" data-aos="fade-up">
+      <div class="container">
+        <div class="row g-4">
+
+          <div class="col-md-4" data-aos="zoom-in" data-aos-delay="0">
+            <div class="info-card">
+              <div class="info-icon"><i class="bi bi-clock"></i></div>
+              <h5>Horarios</h5>
+              <p>Viernes • Sábado • Domingo • 19:00 – 02:00</p>
+            </div>
+          </div>
+
+          <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="info-card">
+              <div class="info-icon"><i class="bi bi-geo-alt"></i></div>
+              <h5>Ubicación</h5>
+              <p>Antofagasta • Delivery disponible • 14 de Febrero 2532</p>
+            </div>
+          </div>
+
+          <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+            <div class="info-card">
+              <div class="info-icon"><i class="bi bi-telephone"></i></div>
+              <h5>Contacto</h5>
+              <p>
+                <i class="bi bi-whatsapp"></i> +56 9 XXXX XXXX<br />
+                <i class="bi bi-instagram"></i> @elsandwishazo
+              </p>
+            </div>
+          </div>
+
+          <!-- MAPA -->
+          <div class="col-12" data-aos="fade-up" data-aos-delay="150">
+            <div class="map-card">
+              <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
+                <h5 class="mb-0">Encuéntranos</h5>
+                <span class="badge rounded-pill map-badge">
+                  <i class="bi bi-geo-alt"></i> Antofagasta
+                </span>
+              </div>
+
+              <div class="map-embed">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3654.675402782651!2d-70.39728102383656!3d-23.65179297873781!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x96afd51a1a9d3d4d%3A0x33233a77ac1c19f9!2s14%20de%20Febrero%202532%2C%201240000%20Antofagasta!5e0!3m2!1ses-419!2scl!4v1770682968519!5m2!1ses-419!2scl"
+                  width="100%"
+                  height="320"
+                  style="border:0;"
+                  allowfullscreen
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  title="Mapa El Sandwishazo"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER PRO -->
+    <footer class="footer-pro" data-aos="fade-up">
+      <div class="container text-center">
+        <p class="mb-1">© 2026 El Sandwishazo</p>
+        <small>Hecho con ❤️ en Antofagasta</small>
+      </div>
+    </footer>
+
+    <!-- MODAL IMAGEN PRODUCTO -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-sm-down">
+        <div class="modal-content bg-dark border-0">
+          <div class="modal-header border-0">
+            <h5 class="modal-title text-light" id="imageModalTitle"></h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body text-center">
+            <img id="imageModalImg" src="" class="img-fluid rounded-4 bg-white p-3" alt="Producto" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /#siteContent -->
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- app.js (relativo) -->
+  <script src="js/app.js"></script>
+
+  <!-- AOS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 650, once: true, offset: 80 });
+  </script>
+</body>
+</html>
