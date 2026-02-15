@@ -1,8 +1,7 @@
 /* =========================================
    EL SANDWICHAZO - app.js (COMPLETO)
    - Categorías + Carrito + WhatsApp + Modal Img
-   - Festín: centrado perfecto + auto + click + EXPLOSIÓN SUAVE (grande/lenta)
-   - Botón WhatsApp: vibra/incita al click
+   - Festín: video trailer CLARO + auto + click + EXPLOSIÓN grande/lenta
 ========================================= */
 
 /* ========= CONFIG ========= */
@@ -163,6 +162,26 @@ const PRODUCTS = [
         desc: "Sandwichazo Crunch + papas naturales + bebida personal.",
         img: "assets/combos/crunch.png"
     },
+
+    // ===== BEBIDAS (nota: ids deben ser únicos) =====
+    {
+        id: "bebida-cocacola-500",
+        title: "Bebida Coca-cola 500ml",
+        tag: "Bebidas",
+        category: "bebidas",
+        price: 3000,
+        desc: "Bebida coca-cola 500ml.",
+        img: "assets/bebidas/cocacola500ml.png"
+    },
+    {
+        id: "bebida-cocacola-15",
+        title: "Bebida Coca-cola 1.5 lt",
+        tag: "Bebidas",
+        category: "bebidas",
+        price: 3000,
+        desc: "Bebida coca-cola 1.5 lt.",
+        img: "assets/bebidas/bebidacocacola.png"
+    }
 ];
 
 /* ========= HELPERS ========= */
@@ -745,14 +764,52 @@ function wireCategoryFilters() {
 }
 
 /* =====================================================
-   FESTÍN (INTRO) + EXPLOSIÓN SUAVE GRANDE/LENTA
-   ✅ Si no existe #siteContent, lo crea automáticamente
+   ✅ EXPLOSIÓN (GRANDE + LENTA) - ARRIBA DE TODO
+===================================================== */
+function triggerFestinExplosion() {
+    const burst = document.createElement("div");
+    burst.className = "festin-burst";
+    document.body.appendChild(burst);
+
+    const colors = ["#ffc107", "#ff3d3d", "#25D366", "#4aa3ff", "#ffffff"];
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
+
+    const count = 54;
+    for (let i = 0; i < count; i++) {
+        const p = document.createElement("div");
+        p.className = "festin-particle";
+        p.style.background = colors[i % colors.length];
+
+        const angle = (Math.PI * 2 * i) / count;
+        const dist = 320 + Math.random() * 520;
+        const x1 = Math.cos(angle) * dist;
+        const y1 = Math.sin(angle) * dist;
+
+        p.style.setProperty("--x0", `${cx + (Math.random() * 18 - 9)}px`);
+        p.style.setProperty("--y0", `${cy + (Math.random() * 18 - 9)}px`);
+        p.style.setProperty("--x1", `${cx + x1}px`);
+        p.style.setProperty("--y1", `${cy + y1}px`);
+        p.style.setProperty("--rot", `${(Math.random() * 720 - 360).toFixed(0)}deg`);
+
+        const s = 12 + Math.random() * 18;
+        p.style.width = `${s}px`;
+        p.style.height = `${s}px`;
+        p.style.borderRadius = `${3 + Math.random() * 10}px`;
+
+        burst.appendChild(p);
+    }
+
+    setTimeout(() => burst.remove(), 1900);
+}
+
+/* =====================================================
+   FESTÍN (INTRO) - VIDEO TRAILER CLARO + CLOSE
 ===================================================== */
 function ensureSiteContentWrapper(festinEl) {
     let app = document.getElementById("siteContent");
     if (app) return app;
 
-    // Crea wrapper y mueve todo lo que NO sea el festin dentro
     app = document.createElement("div");
     app.id = "siteContent";
 
@@ -770,23 +827,16 @@ function initFestin() {
     const festin = document.getElementById("festinHero");
     if (!festin) return;
 
-    // inyecta capa de partículas si no existe
-    if (!festin.querySelector(".festin-burst")) {
-        const burst = document.createElement("div");
-        burst.className = "festin-burst";
-        festin.appendChild(burst);
-    }
-
     const app = ensureSiteContentWrapper(festin);
     if (!app) return;
 
-    // Estado inicial: solo festín
     document.body.classList.add("app-loading");
     app.style.visibility = "hidden";
 
     festin.style.display = "grid";
     festin.setAttribute("aria-hidden", "false");
 
+    const videoMain = festin.querySelector(".festin-video");
     let closed = false;
     let autoTimer = null;
 
@@ -796,51 +846,44 @@ function initFestin() {
 
         if (autoTimer) clearTimeout(autoTimer);
 
-        // 🔥 EXPLOSIÓN GRANDE + LENTA
-        festin.classList.add("festin-explode");
+        // ✅ oculta el festín
+        festin.classList.add("festin-hide");
 
-        // después de la explosión, desaparece el overlay
+        // ✅ explosión SIEMPRE visible (va en body con z-index alto)
         setTimeout(() => {
-            festin.classList.add("festin-hide");
-        }, 1350);
+            triggerFestinExplosion();
+            document.body.classList.add("festin-flash");
+            setTimeout(() => document.body.classList.remove("festin-flash"), 700);
+        }, 60);
 
-        // ocultar totalmente + mostrar sitio
+        // ✅ muestra el sitio
         setTimeout(() => {
             festin.style.display = "none";
             festin.setAttribute("aria-hidden", "true");
-
             document.body.classList.remove("app-loading");
             app.style.visibility = "visible";
-
-            document.body.classList.add("festin-flash");
-            setTimeout(() => document.body.classList.remove("festin-flash"), 650);
-        }, 2050);
+        }, 760);
     };
 
-    // Tap/click para entrar (sin botón)
+    // Click/tap para entrar
     festin.addEventListener("click", close, {
         once: true
     });
 
     // Auto-entrar (27s)
     autoTimer = setTimeout(close, 27000);
-}
 
-/* ========= WHATSAPP ATTENTION ========= */
-function initWhatsAppAttention() {
-    const wa = document.getElementById("btnWhatsappTop");
-    if (!wa) return;
-
-    // arranca después de un toque de tiempo
-    setTimeout(() => {
-        wa.classList.add("wa-attention");
-    }, 900);
+    // Si termina el video, entra (opcional)
+    if (videoMain) {
+        videoMain.addEventListener("ended", close, {
+            once: true
+        });
+    }
 }
 
 /* ========= INIT ========= */
 document.addEventListener("DOMContentLoaded", () => {
     initFestin();
-    initWhatsAppAttention();
 
     renderMenu();
     renderCart();

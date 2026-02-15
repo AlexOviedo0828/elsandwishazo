@@ -45,14 +45,31 @@
   <!-- ✅ FESTÍN (INTRO) SIN VIDEO -->
   <!-- ✅ aria-hidden corregido -->
   <section class="festin-hero" id="festinHero" aria-hidden="false">
+    <!-- VIDEO FONDO -->
+    <video
+      class="festin-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      poster="assets/UN.jpg"
+    >
+      <!-- ✅ pon aquí tu video trailer -->
+      <source src="assets/LLEGAMOS A ANTOFAGASTA.mp4" type="video/mp4" />
+    </video>
+  
+    <!-- OSCURECER + VIÑETA -->
     <div class="festin-overlay"></div>
-
-    <div class="festin-card" role="presentation">
-      <!-- ✅ ruta corregida a tu asset -->
-      <img class="festin-img" src="assets/sin-fondo.png" alt="El Sandwishazo" />
-
-      <h2 class="festin-title">¡Bienvenido al Sandwishazo!</h2>
-     <p class="festin-sub">Prepárate para un golpe de sabor.</p>
+  
+    <!-- TEXTO ENCIMA -->
+    <div class="festin-content">
+      <h2 class="festin-title">EL SANDWISHAZO</h2>
+      <p class="festin-sub">Prepárate para un golpe de sabor.</p>
+  
+      <div class="festin-hint">
+        <i class="bi bi-hand-index-thumb"></i> Toca para entrar
+      </div>
     </div>
   </section>
 
@@ -238,7 +255,7 @@
         </div>
       </div>
     </section>
-
+    
     <!-- INFO PRO -->
     <section class="py-5 info-section" data-aos="fade-up">
       <div class="container">
