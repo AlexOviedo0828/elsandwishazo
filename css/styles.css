@@ -1,3 +1,10 @@
+/* =========================================================
+   EL SANDWISHAZO - styles.css (COMPLETO)
+   ✅ Carrito en OFFCANVAS (no estático)
+   ✅ Arreglos responsive (no se corta / no excede)
+   ✅ SweetAlert2 (modal tamaños + radios bien)
+========================================================= */
+
 :root{
   --bg-main:#050814;
   --glass: rgba(255,255,255,0.06);
@@ -10,6 +17,12 @@
 
 *{ box-sizing:border-box; }
 
+html, body{
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* ✅ evita “excede” horizontal */
+}
+
 body{
   background: radial-gradient(circle at top, #0b1030, #040610);
   color: var(--text);
@@ -18,7 +31,7 @@ body{
 
 .text-muted{ color: var(--muted) !important; }
 
-/* ✅ ANCHO PRO */
+/* ✅ ANCHO */
 .site-container{
   max-width: 1680px;
   margin: 0 auto;
@@ -70,19 +83,8 @@ body{
   .logo-pro{ font-size: 1.25rem; }
 }
 
-#menuDropdownBtn{
-  border-radius: 12px;
-  font-weight: 600;
-  padding: 6px 14px;
-  transition: all .25s ease;
-}
-#menuDropdownBtn:hover{
-  background: rgba(255,255,255,0.08);
-  box-shadow: 0 0 12px rgba(255,193,7,0.4);
-}
-
 /* ===============================
-   WHATSAPP NEON (BRILLO + VIBRA)
+   BOTÓN CARRITO (estilo pro)
 ================================ */
 .btn-wa-pro{
   border-radius: 14px;
@@ -98,31 +100,29 @@ body{
     0 0 28px rgba(255,193,7,0.35);
 
   transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+  white-space: nowrap;
 }
 
-/* glow neon */
 .btn-wa-pro::before{
   content:"";
   position:absolute;
   inset:-10px;
   border-radius: 18px;
-  background: radial-gradient(circle at 30% 30%, rgba(37,211,102,.55), transparent 60%),
-              radial-gradient(circle at 70% 70%, rgba(255,193,7,.55), transparent 60%);
+  background:
+    radial-gradient(circle at 30% 30%, rgba(37,211,102,.55), transparent 60%),
+    radial-gradient(circle at 70% 70%, rgba(255,193,7,.55), transparent 60%);
   filter: blur(10px);
   opacity: .9;
   z-index: -1;
   animation: waGlow 2.6s ease-in-out infinite;
 }
-
 @keyframes waGlow{
   0%,100%{ transform: scale(.98); opacity:.75; }
   50%{ transform: scale(1.05); opacity:1; }
 }
 
-/* vibra + “invita a click” */
-.btn-wa-pro{
-  animation: waNudge 2.9s infinite;
-}
+/* vibra */
+.btn-wa-pro{ animation: waNudge 2.9s infinite; }
 @keyframes waNudge{
   0%{ transform: translate3d(0,0,0); }
   70%{ transform: translate3d(0,0,0); }
@@ -142,26 +142,40 @@ body{
     0 0 40px rgba(37,211,102,0.45);
 }
 
-/* PAGE WRAP */
+/* BADGE (conteo) */
+.btn-wa-pro{ position: relative; }
+.cart-badge{
+  position:absolute;
+  top: -8px;
+  right: -8px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+
+  font-size: 12px;
+  font-weight: 1000;
+
+  background: #ff2d2d;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.35);
+  box-shadow: 0 0 18px rgba(255,45,45,0.45);
+}
+
+/* ===============================
+   PAGE WRAP
+================================ */
 .page-wrap{
   background:
     radial-gradient(900px 300px at 20% 10%, rgba(255,193,7,0.18), transparent),
     radial-gradient(700px 300px at 80% 20%, rgba(255,0,0,0.12), transparent);
 }
 
-/* BOTONES */
-.btn-warning{
-  font-weight: 800;
-  box-shadow: 0 0 12px rgba(255,193,7,.45);
-}
-.btn-warning:hover{
-  box-shadow: 0 0 20px rgba(255,193,7,.75);
-}
-.btn-outline-light:hover{
-  background: rgba(255,255,255,.08);
-}
-
-/* CAROUSEL PRO */
+/* ===============================
+   CAROUSEL PRO
+================================ */
 .carousel-section{ width: 100%; }
 .pro-carousel{
   width: 100%;
@@ -192,7 +206,15 @@ body{
   filter: drop-shadow(0 6px 10px rgba(0,0,0,0.65));
 }
 
-/* GRID MENU */
+/* ✅ IMPORTANTE: evita que los botones del carousel “molesten” en móvil cuando hay overlays */
+.carousel-control-prev,
+.carousel-control-next{
+  width: 14%;
+}
+
+/* ===============================
+   GRID MENÚ
+================================ */
 .menu-grid{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -235,78 +257,7 @@ body{
 }
 
 /* ===============================
-   CARRITO PRO
-================================ */
-.cart-sticky-yellow{
-  position: sticky;
-  top: 90px;
-}
-.cart-wrap{
-  border-radius: 22px;
-  padding: 10px;
-  background: rgba(255,193,7,0.12);
-  border: 1px solid rgba(255,193,7,0.35);
-  box-shadow: 0 0 35px rgba(255,193,7,0.10);
-}
-.cart-card{
-  background: linear-gradient(180deg, var(--glass), rgba(255,255,255,.02));
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  backdrop-filter: blur(12px);
-}
-.cart-header{
-  padding: .6rem .9rem;
-  font-size: .95rem;
-  background: transparent;
-  border-bottom: 1px solid var(--border);
-  color: var(--text);
-}
-.cart-body{ padding: .9rem; }
-
-.cart-list{
-  max-height: 320px;
-  overflow: auto;
-  padding-right: 4px;
-}
-#cartList .list-group-item{
-  background: rgba(255,255,255,.04);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  margin-bottom: 10px;
-  color: var(--text);
-  padding: .7rem;
-}
-.cart-thumb{
-  width: 78px;
-  height: 78px;
-  border-radius: 16px;
-  background: #f3f0f0;
-  object-fit: contain;
-  padding: 10px;
-  border: 1px solid rgba(255,255,255,.18);
-  box-shadow: 0 10px 22px rgba(0,0,0,.35);
-}
-
-/* Totales */
-.cart-card .text-muted{ color: rgba(245,247,255,0.86) !important; }
-#cartSubtotal, #deliveryFee{
-  color: #ffffff !important;
-  font-weight: 900;
-  font-size: 1.05rem;
-}
-#cartTotal{
-  color: var(--accent) !important;
-  font-weight: 950;
-  font-size: 1.18rem;
-}
-.cart-body > .d-flex{
-  padding: 6px 0;
-  border-bottom: 1px dashed rgba(255,255,255,0.10);
-}
-.cart-body > .d-flex:last-of-type{ border-bottom: none; }
-
-/* ===============================
-   INFO SECTION PRO
+   INFO SECTION
 ================================ */
 .info-section{
   background:
@@ -381,28 +332,201 @@ body{
 .footer-pro p{ font-weight: 800; letter-spacing: 1px; }
 .footer-pro small{ color: rgba(255,193,7,0.7); }
 
-/* RESPONSIVE */
-@media (max-width: 992px){
-  .cart-sticky-yellow{ position: static; }
-  .carousel-img{ height: 300px; }
-  .menu-grid{ grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+/* =========================
+   MENU TABS
+========================= */
+.menu-tabs{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
 }
-@media (max-width: 576px){
-  #menu .card-img-top{ height: 260px; }
-  .carousel-img{ height: 220px; }
-  .pro-carousel{ border-radius: 16px; }
-  .menu-grid{ grid-template-columns: 1fr; }
-  .cart-thumb{ width: 68px; height: 68px; border-radius: 14px; }
+.filter-btn{
+  appearance:none;
+  border: 1px solid rgba(255,193,7,0.35);
+  background: rgba(255,255,255,0.05);
+  color: rgba(245,247,255,0.92);
+  padding: 8px 14px;
+  border-radius: 14px;
+  font-weight: 900;
+  letter-spacing: .3px;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+  backdrop-filter: blur(10px);
+  white-space: nowrap;
+}
+.filter-btn:hover{
+  transform: translateY(-1px);
+  border-color: rgba(255,193,7,0.65);
+  box-shadow: 0 0 18px rgba(255,193,7,0.18);
+}
+.filter-btn.active{
+  background: linear-gradient(180deg, #ffe58a, var(--accent));
+  color: #05120b;
+  border-color: rgba(255,193,7,0.85);
+  box-shadow: 0 0 18px rgba(255,193,7,0.55);
 }
 
-[data-aos]{ will-change: transform, opacity; }
+/* ===============================
+   OFFCANVAS CARRITO (NUEVO)
+================================ */
+.offcanvas-cart{
+  background: rgba(5, 8, 20, 0.96);
+  color: var(--text);
+  border-left: 1px solid rgba(255,193,7,0.22);
+  backdrop-filter: blur(14px);
+  box-shadow: -20px 0 60px rgba(0,0,0,0.65);
+  width: min(92vw, 420px) !important; /* ✅ no excede en móvil */
+  max-width: 420px !important;
+}
 
-/* =====================================================
-   FESTÍN PRO (INTRO) - VIDEO TRAILER (ARREGLADO)
-   ✅ video CLARO
-   ✅ PC: cover (pro)
-   ✅ móvil: contain (no se corta feo)
-===================================================== */
+.offcanvas-cart .offcanvas-header{
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+.offcanvas-cart .btn-close{
+  filter: invert(1) grayscale(1);
+  opacity: .9;
+}
+
+.cart-wrap-offcanvas{
+  padding: 10px;
+  border-radius: 18px;
+  background: rgba(255,193,7,0.10);
+  border: 1px solid rgba(255,193,7,0.25);
+  box-shadow: 0 0 30px rgba(255,193,7,0.10);
+}
+
+/* ===============================
+   CARRITO (dentro del offcanvas)
+================================ */
+.cart-wrap{
+  border-radius: 22px;
+  padding: 10px;
+  background: rgba(255,193,7,0.12);
+  border: 1px solid rgba(255,193,7,0.35);
+  box-shadow: 0 0 35px rgba(255,193,7,0.10);
+}
+
+.cart-card{
+  background: linear-gradient(180deg, var(--glass), rgba(255,255,255,.02));
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+}
+
+.cart-body{
+  padding: .9rem;
+}
+
+/* Lista con scroll dentro del offcanvas */
+.cart-list{
+  max-height: 46vh;          /* ✅ se ajusta a pantalla */
+  overflow: auto;
+  padding-right: 4px;
+}
+#cartList .list-group-item{
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 10px;
+  color: var(--text);
+  padding: .7rem;
+}
+
+.cart-thumb{
+  width: 78px;
+  height: 78px;
+  border-radius: 16px;
+  background: #f3f0f0;
+  object-fit: contain;
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow: 0 10px 22px rgba(0,0,0,.35);
+}
+
+/* Totales */
+.cart-card .text-muted{ color: rgba(245,247,255,0.86) !important; }
+#cartSubtotal, #deliveryFee{
+  color: #ffffff !important;
+  font-weight: 900;
+  font-size: 1.05rem;
+}
+#cartTotal{
+  color: var(--accent) !important;
+  font-weight: 950;
+  font-size: 1.18rem;
+}
+
+/* ===============================
+   SWEETALERT2 (ARREGLOS)
+   ✅ no se sale de pantalla
+   ✅ radios / textos no se cortan
+================================ */
+.swal2-container{
+  padding: 12px !important; /* ✅ margen en móvil */
+}
+
+/* Popup responsivo */
+.swal2-popup{
+  width: min(92vw, 560px) !important; /* ✅ NO excede */
+  max-width: 560px !important;
+  border-radius: 18px !important;
+}
+
+/* Contenido scrollable si es alto */
+.swal2-html-container{
+  margin: 12px 0 0 !important;
+  max-height: 62vh;         /* ✅ se ve completo */
+  overflow: auto;
+  padding-right: 6px;
+}
+
+/* Inputs 100% */
+.swal2-popup .form-control,
+.swal2-popup textarea{
+  width: 100% !important;
+}
+
+/* Botonera: que no se “salga” */
+.swal2-actions{
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  margin-top: 14px !important;
+}
+.swal2-actions button{
+  min-width: 140px;
+}
+
+/* ✅ Radios “Personal / Grande” alineados, sin partir palabras */
+.swal2-popup .form-check{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 0 !important;
+  margin: 0;
+}
+.swal2-popup .form-check-input{
+  margin: 0 !important;
+}
+.swal2-popup .form-check-label{
+  display: inline-block;
+  white-space: nowrap;      /* ✅ no parte “Personal” */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Si el teléfono está MUY angosto, permite wrap con orden bonito */
+@media (max-width: 360px){
+  .swal2-popup .form-check-label{
+    white-space: normal;
+    line-height: 1.2;
+  }
+}
+
+/* ===============================
+   FESTÍN (INTRO)
+================================ */
 .festin-hero{
   position:fixed;
   inset:0;
@@ -415,63 +539,31 @@ body{
   overflow:hidden;
 }
 
-/* fondo blur */
-.festin-video-bg{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  filter: blur(20px) brightness(.45) saturate(1.25); /* ✅ más claro */
-  transform: scale(1.10);
-}
-
-/* capa oscura para contraste (menos negro) */
-.festin-hero::before{
-  content:"";
+.festin-overlay{
   position:absolute;
   inset:0;
   background:
     radial-gradient(1200px 800px at 50% 40%, rgba(255,193,7,.10), transparent 62%),
-    linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.45)); /* ✅ menos oscuro */
+    linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.45));
   z-index:1;
 }
 
-/* contenedor del video principal */
-.festin-video-wrap{
-  position:relative;
-  z-index:2;
-  width:min(980px, 92vw);
-  aspect-ratio: 16 / 9;
-  border-radius: 22px;
-  overflow:hidden;
-  border: 1px solid rgba(255,255,255,.16);
-  box-shadow:
-    0 30px 90px rgba(0,0,0,.85),
-    0 0 40px rgba(246, 245, 244, 0.18);
-}
-
-/* video principal (CLARO) */
 .festin-video{
-  width:100%;
-  height:100%;
-  object-fit: cover;                 /* ✅ PC se ve “trailer” pro */
-  object-position: center;
-  background:#000;
-  filter: brightness(1.08) contrast(1.08) saturate(1.10); /* ✅ MÁS CLARO */
-}
-
-/* UI encima */
-.festin-ui{
   position:absolute;
   inset:0;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  object-position: center;
+  background:#000;
+  filter: brightness(1.08) contrast(1.08) saturate(1.10);
+}
+
+.festin-content{
+  position:relative;
+  z-index:2;
   text-align:center;
   padding: 18px;
-  pointer-events:none;
 }
 
 .festin-title{
@@ -489,7 +581,6 @@ body{
   color: rgba(255,255,255,.82);
 }
 
-/* “toca para entrar” */
 .festin-hint{
   margin-top: 14px;
   padding: 8px 12px;
@@ -507,7 +598,6 @@ body{
   50%{ transform: translateY(-3px); opacity:1; }
 }
 
-/* salida del festín */
 .festin-hide{
   animation: festinOut .75s ease forwards;
 }
@@ -519,13 +609,11 @@ body{
   }
 }
 
-/* =====================================================
-   EXPLOSIÓN (GRANDE + LENTA) - SIEMPRE VISIBLE
-===================================================== */
+/* EXPLOSIÓN */
 .festin-burst{
   position: fixed;
   inset: 0;
-  z-index: 1000005; /* ✅ arriba de TODO */
+  z-index: 1000005;
   pointer-events: none;
   overflow: hidden;
 }
@@ -535,9 +623,8 @@ body{
   box-shadow:
     0 0 14px rgba(255,193,7,.55),
     0 0 22px rgba(37,211,102,.25);
-  animation: particleFly 1.35s ease-out forwards;  /* ✅ lenta */
+  animation: particleFly 1.35s ease-out forwards;
 }
-
 @keyframes particleFly{
   0%{
     transform: translate3d(var(--x0), var(--y0), 0) scale(.7) rotate(0deg);
@@ -550,7 +637,6 @@ body{
   }
 }
 
-/* flash suave */
 body.festin-flash::before{
   content:"";
   position:fixed;
@@ -564,20 +650,35 @@ body.festin-flash::before{
   to{ opacity:0; }
 }
 
-/* RESPONSIVE FESTÍN */
+/* ===============================
+   RESPONSIVE GENERAL
+================================ */
+@media (max-width: 992px){
+  .carousel-img{ height: 300px; }
+  .menu-grid{ grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+}
 @media (max-width: 576px){
-  .festin-video-wrap{
-    width: 94vw;
-    aspect-ratio: 9 / 16; /* ✅ mejor en móvil */
-    border-radius: 18px;
-  }
+  #menu .card-img-top{ height: 260px; }
+  .carousel-img{ height: 220px; }
+  .pro-carousel{ border-radius: 16px; }
+  .menu-grid{ grid-template-columns: 1fr; }
+  .cart-thumb{ width: 68px; height: 68px; border-radius: 14px; }
+  .filter-btn{ flex: 1; text-align:center; }
+  .btn-wa-pro{ padding: 6px 12px; }
+}
+
+/* En móvil: festín no recorta el video */
+@media (max-width: 576px){
   .festin-video{
-    object-fit: contain; /* ✅ móvil: se ve completo */
+    object-fit: contain;
     filter: brightness(1.12) contrast(1.10) saturate(1.12);
   }
 }
 
-/* REDUCE MOTION */
+/* AOS optimización */
+[data-aos]{ will-change: transform, opacity; }
+
+/* Reduce Motion */
 @media (prefers-reduced-motion: reduce){
   .btn-wa-pro,
   .btn-wa-pro::before,

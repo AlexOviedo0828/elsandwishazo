@@ -1,7 +1,11 @@
 /* =========================================
-   EL SANDWICHAZO - app.js (COMPLETO)
-   - Categorías + Carrito + WhatsApp + Modal Img
-   - Festín: video trailer CLARO + auto + click + EXPLOSIÓN grande/lenta
+   EL SANDWICHAZO - app.js (CORREGIDO FINAL)
+   ✅ Carrito en OFFCANVAS (solo aparece al presionar el botón)
+   ✅ Botón arriba es #btnCartTop (no #btnWhatsappTop)
+   ✅ Badge contador actualizado siempre
+   ✅ SweetAlert2 (tamaño y formulario) RESPONSIVE: no se corta en móvil
+   ✅ Fix: textos de radios no se rompen en móvil (wrap)
+   ✅ Enviar pedido: abre formulario y luego WhatsApp
 ========================================= */
 
 /* ========= CONFIG ========= */
@@ -23,7 +27,7 @@ const PRODUCTS = [
         category: "sandwich",
         price: 3500,
         desc: "Sándwichazo cargado con carne de res desmechada, jamón sandwich, queso mozzarella fundido, lechuga fresca, tomate, y salsa secreta Sandwishazo.",
-        img: "assets/sandwish/burguer.png"
+        img: "assets/sandwish/burguer.png",
     },
     {
         id: "sandwichazo-especial",
@@ -32,7 +36,7 @@ const PRODUCTS = [
         category: "sandwich",
         price: 3000,
         desc: "Jamón pierna de cerdo, jamón de ave, jamonada suave, queso mozzarella, lechuga, tomate y salsa especial Sandwishazo.",
-        img: "assets/sandwish/especial.png"
+        img: "assets/sandwish/especial.png",
     },
     {
         id: "sandwichazo-superespecial",
@@ -41,7 +45,7 @@ const PRODUCTS = [
         category: "sandwich",
         price: 3500,
         desc: "Jamón pierna ahumado, jamón acaramelado, jamonada premium, doble queso mozzarella, palta, maicitos gratinados y salsa secreta Sandwishazo.",
-        img: "assets/sandwish/superespecial.png"
+        img: "assets/sandwish/superespecial.png",
     },
     {
         id: "sandwichazo-pavo",
@@ -50,7 +54,7 @@ const PRODUCTS = [
         category: "sandwich",
         price: 3000,
         desc: "Jamón pechuga de pavo, panceta, queso mozarella, lechuga, miel mostaza y salsa secreta Sandwishazo.",
-        img: "assets/sandwish/pavo.png"
+        img: "assets/sandwish/pavo.png",
     },
     {
         id: "sandwichazo-ropavieja",
@@ -59,7 +63,7 @@ const PRODUCTS = [
         category: "sandwich",
         price: 3500,
         desc: "Carne de res desmechada, jamón sandwich, queso mozzarella fundido, lechuga, tomate y salsa secreta Sandwishazo.",
-        img: "assets/sandwish/ropavieja.png"
+        img: "assets/sandwish/ropavieja.png",
     },
     {
         id: "sandwichazo-pollo",
@@ -68,7 +72,7 @@ const PRODUCTS = [
         category: "sandwich",
         price: 3000,
         desc: "Pechuga de pollo desmechada, jamón sandwich, tomate, queso mozzarella, lechuga y salsa secreta Sandwishazo.",
-        img: "assets/sandwish/pollo.png"
+        img: "assets/sandwish/pollo.png",
     },
     {
         id: "sandwichazo-hawaiano",
@@ -77,7 +81,7 @@ const PRODUCTS = [
         category: "sandwich",
         price: 3000,
         desc: "Jamón pierna de cerdo, jamón pechuga de pollo, piña caramelizada, queso mozzarella y salsa secreta Sandwishazo.",
-        img: "assets/sandwish/hawaiano.png"
+        img: "assets/sandwish/hawaiano.png",
     },
     {
         id: "sandwichazo-crunch",
@@ -86,7 +90,7 @@ const PRODUCTS = [
         category: "sandwich",
         price: 3000,
         desc: "Pechuga de pollo apanado, miel mostaza, tomate, lechuga, queso mozzarella y salsa secreta Sandwishazo.",
-        img: "assets/sandwish/crunch.png"
+        img: "assets/sandwish/crunch.png",
     },
 
     // ===== COMBOS =====
@@ -97,7 +101,7 @@ const PRODUCTS = [
         category: "combos",
         price: 3500,
         desc: "Sandwichazo Burguer + papas naturales + bebida personal.",
-        img: "assets/combos/comboburguer.png"
+        img: "assets/combos/comboburguer.png",
     },
     {
         id: "combo-especial",
@@ -106,7 +110,7 @@ const PRODUCTS = [
         category: "combos",
         price: 3000,
         desc: "Sandwichazo Especial + papas naturales + bebida personal.",
-        img: "assets/combos/especial.png"
+        img: "assets/combos/especial.png",
     },
     {
         id: "combo-superespecial",
@@ -115,7 +119,7 @@ const PRODUCTS = [
         category: "combos",
         price: 3500,
         desc: "Sandwichazo super especial + papas naturales + bebida personal.",
-        img: "assets/combos/superespecial.png"
+        img: "assets/combos/superespecial.png",
     },
     {
         id: "combo-pavo",
@@ -124,7 +128,7 @@ const PRODUCTS = [
         category: "combos",
         price: 3000,
         desc: "Sandwichazo Pavo + papas naturales + bebida personal.",
-        img: "assets/combos/pavo.png"
+        img: "assets/combos/pavo.png",
     },
     {
         id: "combo-ropavieja",
@@ -133,7 +137,7 @@ const PRODUCTS = [
         category: "combos",
         price: 3500,
         desc: "Sandwichazo Ropa Vieja + papas naturales + bebida personal.",
-        img: "assets/combos/ropavieja.png"
+        img: "assets/combos/ropavieja.png",
     },
     {
         id: "combo-pollo",
@@ -142,7 +146,7 @@ const PRODUCTS = [
         category: "combos",
         price: 3000,
         desc: "Sandwichazo Pollo + papas naturales + bebida personal.",
-        img: "assets/combos/pollo.png"
+        img: "assets/combos/pollo.png",
     },
     {
         id: "combo-hawaiano",
@@ -151,7 +155,7 @@ const PRODUCTS = [
         category: "combos",
         price: 3000,
         desc: "Sandwichazo Hawaiano + papas naturales + bebida personal.",
-        img: "assets/combos/hawaiano.png"
+        img: "assets/combos/hawaiano.png",
     },
     {
         id: "combo-crunch",
@@ -160,10 +164,10 @@ const PRODUCTS = [
         category: "combos",
         price: 3000,
         desc: "Sandwichazo Crunch + papas naturales + bebida personal.",
-        img: "assets/combos/crunch.png"
+        img: "assets/combos/crunch.png",
     },
 
-    // ===== BEBIDAS (nota: ids deben ser únicos) =====
+    // ===== BEBIDAS =====
     {
         id: "bebida-cocacola-500",
         title: "Bebida Coca-cola 500ml",
@@ -171,7 +175,7 @@ const PRODUCTS = [
         category: "bebidas",
         price: 3000,
         desc: "Bebida coca-cola 500ml.",
-        img: "assets/bebidas/cocacola500ml.png"
+        img: "assets/bebidas/cocacola500ml.png",
     },
     {
         id: "bebida-cocacola-15",
@@ -180,8 +184,8 @@ const PRODUCTS = [
         category: "bebidas",
         price: 3000,
         desc: "Bebida coca-cola 1.5 lt.",
-        img: "assets/bebidas/bebidacocacola.png"
-    }
+        img: "assets/bebidas/bebidacocacola.png",
+    },
 ];
 
 /* ========= HELPERS ========= */
@@ -272,6 +276,22 @@ function totalCarrito() {
     return subtotalCarrito() + costoDespacho();
 }
 
+/* ========= BADGE ========= */
+function contarProductosEnCarrito() {
+    let count = 0;
+    for (const item of carrito.values()) count += Number(item.qty || 0);
+    return count;
+}
+
+function updateCartBadge() {
+    const badge = document.getElementById("cartCountBadge");
+    if (!badge) return;
+
+    const n = contarProductosEnCarrito();
+    badge.textContent = String(n);
+    badge.style.display = n > 0 ? "grid" : "none";
+}
+
 /* ========= CATEGORÍAS ========= */
 function etiquetaCategoria(cat) {
     const mapa = {
@@ -286,6 +306,10 @@ function etiquetaCategoria(cat) {
 function actualizarUIcategoria(cat) {
     const sub = seleccionar("#menuSubtitle");
     if (sub) sub.textContent = `Mostrando: ${etiquetaCategoria(cat)}`;
+
+    document.querySelectorAll(".filter-btn").forEach((b) => {
+        b.classList.toggle("active", b.dataset.category === cat);
+    });
 }
 
 function productosFiltrados() {
@@ -300,34 +324,38 @@ function renderMenu() {
 
     const lista = productosFiltrados();
 
-    grid.innerHTML = lista.map((p, i) => `
-      <div data-aos="fade-up" data-aos-delay="${Math.min(i * 60, 360)}">
-        <div class="card h-100 shadow-sm">
-          <img
-            src="${obtenerImagenSegura(p)}"
-            class="card-img-top product-img"
-            alt="${escaparHTML(p.title)}"
-            loading="lazy"
-            data-title="${escaparHTML(p.title)}"
-            data-img="${obtenerImagenSegura(p)}"
-            onerror="this.onerror=null;this.src='${CONFIG.FALLBACK_IMG}';"
-          />
-          <div class="card-body d-flex flex-column">
-            <div class="d-flex justify-content-between align-items-start gap-2 mb-1">
-              <h5 class="card-title mb-0">${escaparHTML(p.title)}</h5>
-              ${p.tag ? `<span class="badge bg-warning text-dark">${escaparHTML(p.tag)}</span>` : ""}
-            </div>
-            <p class="card-text small text-muted mb-2">${escaparHTML(p.desc)}</p>
-            <div class="mt-auto d-flex justify-content-between align-items-center">
-              <span class="fw-bold">${formatearCLP(p.price)}</span>
-              <button class="btn btn-warning btn-sm fw-semibold" data-add="${p.id}">
-                <i class="bi bi-cart-plus"></i> Agregar
-              </button>
+    grid.innerHTML = lista
+        .map(
+            (p, i) => `
+        <div data-aos="fade-up" data-aos-delay="${Math.min(i * 60, 360)}">
+          <div class="card h-100 shadow-sm">
+            <img
+              src="${obtenerImagenSegura(p)}"
+              class="card-img-top product-img"
+              alt="${escaparHTML(p.title)}"
+              loading="lazy"
+              data-title="${escaparHTML(p.title)}"
+              data-img="${obtenerImagenSegura(p)}"
+              onerror="this.onerror=null;this.src='${CONFIG.FALLBACK_IMG}';"
+            />
+            <div class="card-body d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-start gap-2 mb-1">
+                <h5 class="card-title mb-0">${escaparHTML(p.title)}</h5>
+                ${p.tag ? `<span class="badge bg-warning text-dark">${escaparHTML(p.tag)}</span>` : ""}
+              </div>
+              <p class="card-text small text-muted mb-2">${escaparHTML(p.desc)}</p>
+              <div class="mt-auto d-flex justify-content-between align-items-center">
+                <span class="fw-bold">${formatearCLP(p.price)}</span>
+                <button class="btn btn-warning btn-sm fw-semibold" data-add="${p.id}">
+                  <i class="bi bi-cart-plus"></i> Agregar
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    `).join("");
+      `
+        )
+        .join("");
 
     grid.onclick = async (e) => {
         const btn = e.target.closest("[data-add]");
@@ -343,10 +371,57 @@ function renderMenu() {
     if (window.AOS && typeof AOS.refreshHard === "function") AOS.refreshHard();
 }
 
+/* ========= SWEETALERT2: FIX RESPONSIVE ========= */
+function patchSweetAlertForMobile() {
+    // Estilos en línea (sin depender de CSS externo)
+    const styleId = "swal-mobile-fix";
+    if (document.getElementById(styleId)) return;
+
+    const s = document.createElement("style");
+    s.id = styleId;
+    s.textContent = `
+      .swal2-container{ padding: 12px !important; }
+      .swal2-popup{
+        width: min(520px, calc(100vw - 24px)) !important;
+        max-width: calc(100vw - 24px) !important;
+        margin: 0 auto !important;
+        border-radius: 18px !important;
+      }
+      .swal2-html-container{
+        margin: 0.75rem 0 0 !important;
+        overflow-x: hidden !important;
+      }
+      .swal2-actions{ gap: .5rem !important; flex-wrap: wrap !important; }
+      .swal2-actions button{ min-width: 140px; }
+      @media (max-width: 576px){
+        .swal2-popup{ padding: 1rem !important; }
+        .swal2-title{ font-size: 1.35rem !important; }
+        .swal2-actions button{ width: 100% !important; }
+        .swal2-actions{ flex-direction: column !important; }
+        .swal2-close{ right: .75rem !important; top: .75rem !important; }
+        .swal2-html-container .form-check{
+          display:flex !important;
+          align-items:flex-start !important;
+          gap: .6rem !important;
+          white-space: normal !important;
+        }
+        .swal2-html-container .form-check-label{
+          display:block !important;
+          white-space: normal !important;
+          line-height: 1.2 !important;
+          word-break: break-word !important;
+        }
+      }
+    `;
+    document.head.appendChild(s);
+}
+
 /* ========= MODAL TAMAÑO ========= */
 async function pedirTamanoPorItem(productId) {
     const producto = obtenerProducto(productId);
     if (!producto) return null;
+
+    patchSweetAlertForMobile();
 
     const res = await Swal.fire({
         title: "Elige el tamaño",
@@ -402,8 +477,10 @@ function addToCart(id, size) {
 function removeOne(key) {
     const item = carrito.get(key);
     if (!item) return;
+
     if (item.qty <= 1) carrito.delete(key);
     else item.qty -= 1;
+
     renderCart();
 }
 
@@ -420,6 +497,8 @@ function renderCart() {
     if (subEl) subEl.textContent = formatearCLP(subtotalCarrito());
     if (feeEl) feeEl.textContent = formatearCLP(costoDespacho());
     totalEl.textContent = formatearCLP(totalCarrito());
+
+    updateCartBadge();
 
     if (carrito.size === 0) {
         list.innerHTML = `<li class="list-group-item text-muted" style="margin-bottom:0;">Aún no agregas nada</li>`;
@@ -471,6 +550,7 @@ function renderCart() {
             addToCart(item.id, item.size);
             return;
         }
+
         const minus = e.target.closest("[data-minus]");
         if (minus) removeOne(minus.getAttribute("data-minus"));
     };
@@ -540,6 +620,8 @@ function actualizarTotalesDelModal() {
 }
 
 async function openOrderForm() {
+    patchSweetAlertForMobile();
+
     const res = await Swal.fire({
         title: "Datos del pedido",
         html: htmlFormularioPedido(),
@@ -576,7 +658,6 @@ async function openOrderForm() {
                 Swal.showValidationMessage("Escribe tu teléfono.");
                 return false;
             }
-
             if (datosPedido.deliveryType === "delivery") {
                 if (!datosPedido.receiver) {
                     Swal.showValidationMessage("Escribe el nombre de quien recibe.");
@@ -659,15 +740,17 @@ function openWhatsApp(withCart) {
 
 /* ========= BOTONES ========= */
 function wireButtons() {
-    const top = seleccionar("#btnWhatsappTop");
+    // ✅ Tu HTML nuevo usa #btnCartTop (abre offcanvas por data-bs-toggle)
+    const btnCartTop = seleccionar("#btnCartTop");
     const send = seleccionar("#btnSendOrder");
     const clear = seleccionar("#btnClearCart");
 
-    if (top) {
-        top.addEventListener("click", async (e) => {
-            e.preventDefault();
-            if (carrito.size > 0) return openOrderForm();
-            openWhatsApp(false);
+    // Solo por si quieres que al tocar el botón del carrito, si está vacío, igual abra (bootstrap ya lo abre)
+    if (btnCartTop) {
+        btnCartTop.addEventListener("click", () => {
+            // No hacemos nada: Bootstrap Offcanvas lo maneja
+            // Pero actualizamos badge por si acaso
+            updateCartBadge();
         });
     }
 
@@ -752,10 +835,9 @@ function applyCategory(cat, doScroll = false) {
 }
 
 function wireCategoryFilters() {
-    document.querySelectorAll(".dropdown-item[data-category]").forEach((item) => {
-        item.addEventListener("click", (e) => {
-            e.preventDefault();
-            const cat = item.dataset.category || "all";
+    document.querySelectorAll(".filter-btn[data-category]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const cat = btn.dataset.category || "all";
             applyCategory(cat, true);
         });
     });
@@ -763,9 +845,7 @@ function wireCategoryFilters() {
     actualizarUIcategoria(categoriaActual);
 }
 
-/* =====================================================
-   ✅ EXPLOSIÓN (GRANDE + LENTA) - ARRIBA DE TODO
-===================================================== */
+/* ========= EXPLOSIÓN ========= */
 function triggerFestinExplosion() {
     const burst = document.createElement("div");
     burst.className = "festin-burst";
@@ -803,9 +883,7 @@ function triggerFestinExplosion() {
     setTimeout(() => burst.remove(), 1900);
 }
 
-/* =====================================================
-   FESTÍN (INTRO) - VIDEO TRAILER CLARO + CLOSE
-===================================================== */
+/* ========= FESTÍN ========= */
 function ensureSiteContentWrapper(festinEl) {
     let app = document.getElementById("siteContent");
     if (app) return app;
@@ -846,17 +924,14 @@ function initFestin() {
 
         if (autoTimer) clearTimeout(autoTimer);
 
-        // ✅ oculta el festín
         festin.classList.add("festin-hide");
 
-        // ✅ explosión SIEMPRE visible (va en body con z-index alto)
         setTimeout(() => {
             triggerFestinExplosion();
             document.body.classList.add("festin-flash");
             setTimeout(() => document.body.classList.remove("festin-flash"), 700);
         }, 60);
 
-        // ✅ muestra el sitio
         setTimeout(() => {
             festin.style.display = "none";
             festin.setAttribute("aria-hidden", "true");
@@ -865,20 +940,14 @@ function initFestin() {
         }, 760);
     };
 
-    // Click/tap para entrar
     festin.addEventListener("click", close, {
         once: true
     });
-
-    // Auto-entrar (27s)
     autoTimer = setTimeout(close, 27000);
 
-    // Si termina el video, entra (opcional)
-    if (videoMain) {
-        videoMain.addEventListener("ended", close, {
-            once: true
-        });
-    }
+    if (videoMain) videoMain.addEventListener("ended", close, {
+        once: true
+    });
 }
 
 /* ========= INIT ========= */
@@ -890,4 +959,6 @@ document.addEventListener("DOMContentLoaded", () => {
     wireButtons();
     wireImageModal();
     wireCategoryFilters();
+
+    updateCartBadge();
 });
