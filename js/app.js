@@ -816,10 +816,49 @@ function openWhatsApp(withCart) {
     window.open(`https://wa.me/${phone}?text=${msg}`, "_blank");
 }
 
-/* BOTONES (solo del carrito) */
+/* =========================
+   OFFCANVAS HELPERS
+========================= */
+function getCartOffcanvasEl() {
+    return document.getElementById("cartOffcanvas");
+}
+
+function closeCartOffcanvas() {
+    return new Promise((resolve) => {
+        const el = getCartOffcanvasEl();
+        if (!el || typeof bootstrap === "undefined") return resolve();
+
+        const inst = bootstrap.Offcanvas.getInstance(el);
+        if (!inst) return resolve(); // ya está cerrado o no existe instancia
+
+        const done = () => {
+            el.removeEventListener("hidden.bs.offcanvas", done);
+            resolve();
+        };
+
+        el.addEventListener("hidden.bs.offcanvas", done, {
+            once: true
+        });
+        inst.hide();
+    });
+}
+
+/* =========================
+   BOTONES (CORREGIDO)
+   ✅ cierra offcanvas antes de Swal
+========================= */
 function wireButtons() {
+    const top = seleccionar("#btnWhatsappTop"); // si existe en tu HTML
     const send = seleccionar("#btnSendOrder");
     const clear = seleccionar("#btnClearCart");
+
+    if (top) {
+        top.addEventListener("click", async (e) => {
+            e.preventDefault();
+            if (carrito.size > 0) return openOrderForm();
+            openWhatsApp(false);
+        });
+    }
 
     if (send) {
         send.addEventListener("click", async () => {
@@ -827,11 +866,18 @@ function wireButtons() {
                 Swal.fire({
                     icon: "info",
                     title: "Carrito vacío",
-                    text: "Agrega un producto primero."
+                    text: "Agrega un producto primero.",
                 });
                 return;
             }
-            await openOrderForm();
+
+            // ✅ CLAVE: cerrar el offcanvas ANTES de abrir SweetAlert
+            await closeCartOffcanvas();
+
+            // pequeño delay para que Bootstrap libere el foco al 100%
+            setTimeout(async () => {
+                await openOrderForm();
+            }, 80);
         });
     }
 
@@ -857,7 +903,7 @@ function wireButtons() {
                     title: "Listo",
                     text: "Carrito vaciado.",
                     timer: 750,
-                    showConfirmButton: false
+                    showConfirmButton: false,
                 });
             }
         });
