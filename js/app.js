@@ -1,14 +1,13 @@
 /* =========================================
-   EL SANDWICHAZO - app.js (CORREGIDO FINAL)
-   ✅ Carrito en OFFCANVAS (solo aparece al presionar el botón)
-   ✅ Botón arriba es #btnCartTop (no #btnWhatsappTop)
-   ✅ Badge contador actualizado siempre
-   ✅ SweetAlert2 (tamaño y formulario) RESPONSIVE: no se corta en móvil
-   ✅ Fix: textos de radios no se rompen en móvil (wrap)
-   ✅ Enviar pedido: abre formulario y luego WhatsApp
+   EL SANDWICHAZO - app.js (ACTUALIZADO)
+   ✅ Precios por tamaño (21 cm / 35 cm) por cada sándwich
+   ✅ Combos/Bebidas con precio fijo
+   ✅ Totales correctos según tamaño
+   ✅ Modal tamaño muestra precio real
+   ✅ Badge contador
+   ✅ Festín + explosión
 ========================================= */
 
-/* ========= CONFIG ========= */
 const CONFIG = {
     BUSINESS_NAME: "El Sandwishazo",
     CITY: "Antofagasta",
@@ -17,15 +16,23 @@ const CONFIG = {
     DELIVERY_FEE: 2000,
 };
 
-/* ========= PRODUCTS ========= */
+/* =========================================================
+   ✅ PRODUCTOS
+   - Para sándwich: usa "sizes" con precios distintos
+   - Para combos/bebidas: usa "price" fijo
+   👇 EDITA AQUÍ los precios según tu carta real
+========================================================= */
 const PRODUCTS = [
-    // ===== SANDWICH =====
+    // SANDWICHES (con tamaños)
     {
         id: "sandwich-buurguer",
         title: "Sandwichazo Burguer ⭐",
         tag: "Más vendido",
         category: "sandwich",
-        price: 3500,
+        sizes: {
+            personal: 3500,
+            grande: 5000
+        }, // ✅ ejemplo
         desc: "Sándwichazo cargado con carne de res desmechada, jamón sandwich, queso mozzarella fundido, lechuga fresca, tomate, y salsa secreta Sandwishazo.",
         img: "assets/sandwish/burguer.png",
     },
@@ -34,7 +41,10 @@ const PRODUCTS = [
         title: "Sandwichazo Especial",
         tag: "Clásico",
         category: "sandwich",
-        price: 3000,
+        sizes: {
+            personal: 3000,
+            grande: 4500
+        },
         desc: "Jamón pierna de cerdo, jamón de ave, jamonada suave, queso mozzarella, lechuga, tomate y salsa especial Sandwishazo.",
         img: "assets/sandwish/especial.png",
     },
@@ -43,7 +53,10 @@ const PRODUCTS = [
         title: "Sandwichazo super especial",
         tag: "Más vendido",
         category: "sandwich",
-        price: 3500,
+        sizes: {
+            personal: 3500,
+            grande: 5500
+        },
         desc: "Jamón pierna ahumado, jamón acaramelado, jamonada premium, doble queso mozzarella, palta, maicitos gratinados y salsa secreta Sandwishazo.",
         img: "assets/sandwish/superespecial.png",
     },
@@ -52,7 +65,10 @@ const PRODUCTS = [
         title: "Sandwichazo Pavo",
         tag: "Clásico",
         category: "sandwich",
-        price: 3000,
+        sizes: {
+            personal: 3000,
+            grande: 4500
+        },
         desc: "Jamón pechuga de pavo, panceta, queso mozarella, lechuga, miel mostaza y salsa secreta Sandwishazo.",
         img: "assets/sandwish/pavo.png",
     },
@@ -61,7 +77,10 @@ const PRODUCTS = [
         title: "Sandwichazo Ropa Vieja",
         tag: "Más vendido",
         category: "sandwich",
-        price: 3500,
+        sizes: {
+            personal: 3500,
+            grande: 5200
+        },
         desc: "Carne de res desmechada, jamón sandwich, queso mozzarella fundido, lechuga, tomate y salsa secreta Sandwishazo.",
         img: "assets/sandwish/ropavieja.png",
     },
@@ -70,7 +89,10 @@ const PRODUCTS = [
         title: "Sandwichazo Pollo",
         tag: "Clásico",
         category: "sandwich",
-        price: 3000,
+        sizes: {
+            personal: 3000,
+            grande: 4500
+        },
         desc: "Pechuga de pollo desmechada, jamón sandwich, tomate, queso mozzarella, lechuga y salsa secreta Sandwishazo.",
         img: "assets/sandwish/pollo.png",
     },
@@ -79,7 +101,10 @@ const PRODUCTS = [
         title: "Sandwichazo Hawaiano",
         tag: "Clásico",
         category: "sandwich",
-        price: 3000,
+        sizes: {
+            personal: 3000,
+            grande: 4600
+        },
         desc: "Jamón pierna de cerdo, jamón pechuga de pollo, piña caramelizada, queso mozzarella y salsa secreta Sandwishazo.",
         img: "assets/sandwish/hawaiano.png",
     },
@@ -88,18 +113,24 @@ const PRODUCTS = [
         title: "Sandwichazo Crunch",
         tag: "Clásico",
         category: "sandwich",
-        price: 3000,
+        sizes: {
+            personal: 3000,
+            grande: 4700
+        },
         desc: "Pechuga de pollo apanado, miel mostaza, tomate, lechuga, queso mozzarella y salsa secreta Sandwishazo.",
         img: "assets/sandwish/crunch.png",
     },
 
-    // ===== COMBOS =====
+    // COMBOS (precio fijo)
     {
         id: "combo-buurguer",
         title: "Combo Sandwichazo Burguer ⭐",
         tag: "Más vendido",
         category: "combos",
-        price: 3500,
+        sizes: {
+            personal: 3000,
+            grande: 4700
+        },
         desc: "Sandwichazo Burguer + papas naturales + bebida personal.",
         img: "assets/combos/comboburguer.png",
     },
@@ -108,7 +139,11 @@ const PRODUCTS = [
         title: "Combo Sandwichazo Especial",
         tag: "Clásico",
         category: "combos",
-        price: 3000,
+        sizes: {
+            personal: 3000,
+            grande: 4700
+        },
+
         desc: "Sandwichazo Especial + papas naturales + bebida personal.",
         img: "assets/combos/especial.png",
     },
@@ -117,7 +152,11 @@ const PRODUCTS = [
         title: "Combo Sandwichazo super especial",
         tag: "Más vendido",
         category: "combos",
-        price: 3500,
+        sizes: {
+            personal: 3000,
+            grande: 4700
+        },
+
         desc: "Sandwichazo super especial + papas naturales + bebida personal.",
         img: "assets/combos/superespecial.png",
     },
@@ -126,7 +165,11 @@ const PRODUCTS = [
         title: "Combo Sandwichazo Pavo",
         tag: "Clásico",
         category: "combos",
-        price: 3000,
+        sizes: {
+            personal: 3000,
+            grande: 4700
+        },
+
         desc: "Sandwichazo Pavo + papas naturales + bebida personal.",
         img: "assets/combos/pavo.png",
     },
@@ -135,7 +178,10 @@ const PRODUCTS = [
         title: "Combo Sandwichazo Ropa Vieja",
         tag: "Más vendido",
         category: "combos",
-        price: 3500,
+        sizes: {
+            personal: 3000,
+            grande: 4700
+        },
         desc: "Sandwichazo Ropa Vieja + papas naturales + bebida personal.",
         img: "assets/combos/ropavieja.png",
     },
@@ -144,7 +190,10 @@ const PRODUCTS = [
         title: "Combo Sandwichazo Pollo",
         tag: "Clásico",
         category: "combos",
-        price: 3000,
+        sizes: {
+            personal: 3000,
+            grande: 4700
+        },
         desc: "Sandwichazo Pollo + papas naturales + bebida personal.",
         img: "assets/combos/pollo.png",
     },
@@ -153,7 +202,10 @@ const PRODUCTS = [
         title: "Combo Sandwichazo Hawaiano",
         tag: "Clásico",
         category: "combos",
-        price: 3000,
+        sizes: {
+            personal: 3000,
+            grande: 4700
+        },
         desc: "Sandwichazo Hawaiano + papas naturales + bebida personal.",
         img: "assets/combos/hawaiano.png",
     },
@@ -162,12 +214,15 @@ const PRODUCTS = [
         title: "Combo Sandwichazo Crunch",
         tag: "Clásico",
         category: "combos",
-        price: 3000,
+        sizes: {
+            personal: 3000,
+            grande: 4700
+        },
         desc: "Sandwichazo Crunch + papas naturales + bebida personal.",
         img: "assets/combos/crunch.png",
     },
 
-    // ===== BEBIDAS =====
+    // BEBIDAS (precio fijo)
     {
         id: "bebida-cocacola-500",
         title: "Bebida Coca-cola 500ml",
@@ -188,7 +243,7 @@ const PRODUCTS = [
     },
 ];
 
-/* ========= HELPERS ========= */
+/* HELPERS */
 const seleccionar = (selector) => document.querySelector(selector);
 
 function formatearCLP(monto) {
@@ -220,11 +275,38 @@ function escaparHTML(texto) {
         .replaceAll("'", "&#039;");
 }
 
-/* ========= STATE ========= */
+/* ✅ PRECIO SEGÚN TAMAÑO */
+function precioPorSize(producto, size) {
+    if (!producto) return 0;
+
+    // Si tiene sizes (sándwich), usa eso
+    if (producto.sizes && typeof producto.sizes === "object") {
+        return Number(producto.sizes[size] ?? producto.sizes.personal ?? 0);
+    }
+
+    // Si no tiene sizes, usa price fijo
+    return Number(producto.price ?? 0);
+}
+
+/* ✅ para mostrar en la UI “desde $X” */
+function precioMinimo(producto) {
+    if (!producto) return 0;
+    if (producto.sizes) {
+        const vals = Object.values(producto.sizes).map((n) => Number(n || 0));
+        return vals.length ? Math.min(...vals) : 0;
+    }
+    return Number(producto.price ?? 0);
+}
+
+function tieneTamanos(producto) {
+    return !!(producto?.sizes && typeof producto.sizes === "object");
+}
+
+/* STATE */
 const carrito = new Map(); // key = `${id}__${size}`
 let categoriaActual = "all";
 
-/* ========= DATOS DEL PEDIDO ========= */
+/* DATOS PEDIDO */
 const datosPedido = {
     deliveryType: "retiro",
     name: "",
@@ -249,8 +331,11 @@ function limpiarTodoDespuesDeEnviar() {
     renderCart();
 }
 
-/* ========= TAMAÑOS ========= */
-function etiquetaTamano(size) {
+/* TAMAÑOS */
+function etiquetaTamano(size, producto) {
+    // Para combos/bebidas (sin tamaños)
+    if (producto && !tieneTamanos(producto)) return "Único";
+
     return size === "grande" ? "Grande (35 cm)" : "Personal (21 cm)";
 }
 
@@ -258,12 +343,13 @@ function llaveItem(id, size) {
     return `${id}__${size}`;
 }
 
-/* ========= TOTALES ========= */
+/* TOTALES */
 function subtotalCarrito() {
     let total = 0;
     for (const item of carrito.values()) {
         const producto = obtenerProducto(item.id);
-        if (producto) total += producto.price * item.qty;
+        if (!producto) continue;
+        total += precioPorSize(producto, item.size) * Number(item.qty || 0);
     }
     return total;
 }
@@ -276,7 +362,7 @@ function totalCarrito() {
     return subtotalCarrito() + costoDespacho();
 }
 
-/* ========= BADGE ========= */
+/* BADGE CONTEO */
 function contarProductosEnCarrito() {
     let count = 0;
     for (const item of carrito.values()) count += Number(item.qty || 0);
@@ -292,7 +378,7 @@ function updateCartBadge() {
     badge.style.display = n > 0 ? "grid" : "none";
 }
 
-/* ========= CATEGORÍAS ========= */
+/* CATEGORÍAS */
 function etiquetaCategoria(cat) {
     const mapa = {
         all: "Todo",
@@ -317,7 +403,7 @@ function productosFiltrados() {
     return PRODUCTS.filter((p) => p.category === categoriaActual);
 }
 
-/* ========= RENDER MENU ========= */
+/* RENDER MENU */
 function renderMenu() {
     const grid = seleccionar("#menuGrid");
     if (!grid) return;
@@ -344,8 +430,11 @@ function renderMenu() {
                 ${p.tag ? `<span class="badge bg-warning text-dark">${escaparHTML(p.tag)}</span>` : ""}
               </div>
               <p class="card-text small text-muted mb-2">${escaparHTML(p.desc)}</p>
+  
               <div class="mt-auto d-flex justify-content-between align-items-center">
-                <span class="fw-bold">${formatearCLP(p.price)}</span>
+                <span class="fw-bold">
+                  ${tieneTamanos(p) ? `Desde ${formatearCLP(precioMinimo(p))}` : formatearCLP(p.price)}
+                </span>
                 <button class="btn btn-warning btn-sm fw-semibold" data-add="${p.id}">
                   <i class="bi bi-cart-plus"></i> Agregar
                 </button>
@@ -362,66 +451,31 @@ function renderMenu() {
         if (!btn) return;
 
         const idProducto = btn.getAttribute("data-add");
-        const size = await pedirTamanoPorItem(idProducto);
-        if (!size) return;
+        const producto = obtenerProducto(idProducto);
+        if (!producto) return;
 
-        addToCart(idProducto, size);
+        // ✅ Si tiene tamaños -> pedir tamaño
+        if (tieneTamanos(producto)) {
+            const size = await pedirTamanoPorItem(idProducto);
+            if (!size) return;
+            addToCart(idProducto, size);
+            return;
+        }
+
+        // ✅ Si NO tiene tamaños -> agrega “unico”
+        addToCart(idProducto, "unico");
     };
 
     if (window.AOS && typeof AOS.refreshHard === "function") AOS.refreshHard();
 }
 
-/* ========= SWEETALERT2: FIX RESPONSIVE ========= */
-function patchSweetAlertForMobile() {
-    // Estilos en línea (sin depender de CSS externo)
-    const styleId = "swal-mobile-fix";
-    if (document.getElementById(styleId)) return;
-
-    const s = document.createElement("style");
-    s.id = styleId;
-    s.textContent = `
-      .swal2-container{ padding: 12px !important; }
-      .swal2-popup{
-        width: min(520px, calc(100vw - 24px)) !important;
-        max-width: calc(100vw - 24px) !important;
-        margin: 0 auto !important;
-        border-radius: 18px !important;
-      }
-      .swal2-html-container{
-        margin: 0.75rem 0 0 !important;
-        overflow-x: hidden !important;
-      }
-      .swal2-actions{ gap: .5rem !important; flex-wrap: wrap !important; }
-      .swal2-actions button{ min-width: 140px; }
-      @media (max-width: 576px){
-        .swal2-popup{ padding: 1rem !important; }
-        .swal2-title{ font-size: 1.35rem !important; }
-        .swal2-actions button{ width: 100% !important; }
-        .swal2-actions{ flex-direction: column !important; }
-        .swal2-close{ right: .75rem !important; top: .75rem !important; }
-        .swal2-html-container .form-check{
-          display:flex !important;
-          align-items:flex-start !important;
-          gap: .6rem !important;
-          white-space: normal !important;
-        }
-        .swal2-html-container .form-check-label{
-          display:block !important;
-          white-space: normal !important;
-          line-height: 1.2 !important;
-          word-break: break-word !important;
-        }
-      }
-    `;
-    document.head.appendChild(s);
-}
-
-/* ========= MODAL TAMAÑO ========= */
+/* MODAL TAMAÑO */
 async function pedirTamanoPorItem(productId) {
     const producto = obtenerProducto(productId);
     if (!producto) return null;
 
-    patchSweetAlertForMobile();
+    const pPersonal = precioPorSize(producto, "personal");
+    const pGrande = precioPorSize(producto, "grande");
 
     const res = await Swal.fire({
         title: "Elige el tamaño",
@@ -431,11 +485,15 @@ async function pedirTamanoPorItem(productId) {
           <div class="d-flex flex-column gap-2">
             <label class="form-check">
               <input class="form-check-input" type="radio" name="sz" value="personal" checked>
-              <span class="form-check-label">Personal (21 cm)</span>
+              <span class="form-check-label">
+                Personal (21 cm) • <strong>${formatearCLP(pPersonal)}</strong>
+              </span>
             </label>
             <label class="form-check">
               <input class="form-check-input" type="radio" name="sz" value="grande">
-              <span class="form-check-label">Grande (35 cm)</span>
+              <span class="form-check-label">
+                Grande (35 cm) • <strong>${formatearCLP(pGrande)}</strong>
+              </span>
             </label>
           </div>
         </div>
@@ -451,7 +509,7 @@ async function pedirTamanoPorItem(productId) {
     return res.value;
 }
 
-/* ========= CARRITO ========= */
+/* CARRITO */
 function addToCart(id, size) {
     const key = llaveItem(id, size);
     const actual = carrito.get(key);
@@ -465,11 +523,14 @@ function addToCart(id, size) {
 
     renderCart();
 
+    const producto = obtenerProducto(id);
     Swal.fire({
         icon: "success",
         title: "Agregado ✅",
-        text: `${obtenerProducto(id)?.title ?? "Producto"} • ${etiquetaTamano(size)}`,
-        timer: 900,
+        text: `${producto?.title ?? "Producto"} • ${etiquetaTamano(size, producto)} (${formatearCLP(
+        precioPorSize(producto, size)
+      )})`,
+        timer: 950,
         showConfirmButton: false,
     });
 }
@@ -515,6 +576,9 @@ function renderCart() {
         const producto = obtenerProducto(item.id);
         if (!producto) continue;
 
+        const unit = precioPorSize(producto, item.size);
+        const line = unit * Number(item.qty || 0);
+
         itemsHTML.push(`
         <li class="list-group-item">
           <div class="d-flex align-items-start gap-3">
@@ -526,13 +590,18 @@ function renderCart() {
             />
             <div class="flex-grow-1">
               <div class="fw-semibold">${escaparHTML(producto.title)}</div>
-              <div class="text-muted small">Tamaño: <strong>${etiquetaTamano(item.size)}</strong></div>
+              <div class="text-muted small">Tamaño: <strong>${etiquetaTamano(item.size, producto)}</strong></div>
+              <div class="text-muted small">Unitario: <strong>${formatearCLP(unit)}</strong></div>
               <div class="text-muted small">Cantidad: ${item.qty}</div>
-              <div class="small fw-bold">${formatearCLP(producto.price * item.qty)}</div>
+              <div class="small fw-bold">${formatearCLP(line)}</div>
             </div>
             <div class="d-flex flex-column gap-2">
-              <button class="btn btn-outline-light btn-sm" data-plus="${key}" title="Agregar uno"><i class="bi bi-plus"></i></button>
-              <button class="btn btn-outline-secondary btn-sm" data-minus="${key}" title="Quitar uno"><i class="bi bi-dash"></i></button>
+              <button class="btn btn-outline-light btn-sm" data-plus="${key}" title="Agregar uno">
+                <i class="bi bi-plus"></i>
+              </button>
+              <button class="btn btn-outline-secondary btn-sm" data-minus="${key}" title="Quitar uno">
+                <i class="bi bi-dash"></i>
+              </button>
             </div>
           </div>
         </li>
@@ -545,9 +614,9 @@ function renderCart() {
         const plus = e.target.closest("[data-plus]");
         if (plus) {
             const k = plus.getAttribute("data-plus");
-            const item = carrito.get(k);
-            if (!item) return;
-            addToCart(item.id, item.size);
+            const it = carrito.get(k);
+            if (!it) return;
+            addToCart(it.id, it.size);
             return;
         }
 
@@ -556,7 +625,7 @@ function renderCart() {
     };
 }
 
-/* ========= FORMULARIO PEDIDO ========= */
+/* FORM PEDIDO */
 function htmlFormularioPedido() {
     return `
       <div class="text-start">
@@ -564,11 +633,15 @@ function htmlFormularioPedido() {
           <label class="form-label fw-semibold">Tipo de entrega</label>
           <div class="d-flex flex-column gap-2">
             <label class="form-check">
-              <input class="form-check-input" type="radio" name="deliveryType" value="retiro" ${datosPedido.deliveryType === "retiro" ? "checked" : ""}>
+              <input class="form-check-input" type="radio" name="deliveryType" value="retiro" ${
+                datosPedido.deliveryType === "retiro" ? "checked" : ""
+              }>
               <span class="form-check-label">Retiro en tienda</span>
             </label>
             <label class="form-check">
-              <input class="form-check-input" type="radio" name="deliveryType" value="delivery" ${datosPedido.deliveryType === "delivery" ? "checked" : ""}>
+              <input class="form-check-input" type="radio" name="deliveryType" value="delivery" ${
+                datosPedido.deliveryType === "delivery" ? "checked" : ""
+              }>
               <span class="form-check-label">Delivery a domicilio (+ ${formatearCLP(CONFIG.DELIVERY_FEE)})</span>
             </label>
           </div>
@@ -589,7 +662,9 @@ function htmlFormularioPedido() {
   
         <div class="mb-3">
           <label class="form-label fw-semibold">Notas (opcional)</label>
-          <textarea id="od_notes" class="form-control" rows="3" placeholder="Ej: sin tomate / más salsa / etc.">${escaparHTML(datosPedido.notes)}</textarea>
+          <textarea id="od_notes" class="form-control" rows="3" placeholder="Ej: sin tomate / más salsa / etc.">${escaparHTML(
+            datosPedido.notes
+          )}</textarea>
         </div>
   
         <div class="p-3 rounded-3 bg-light border">
@@ -620,8 +695,6 @@ function actualizarTotalesDelModal() {
 }
 
 async function openOrderForm() {
-    patchSweetAlertForMobile();
-
     const res = await Swal.fire({
         title: "Datos del pedido",
         html: htmlFormularioPedido(),
@@ -658,6 +731,7 @@ async function openOrderForm() {
                 Swal.showValidationMessage("Escribe tu teléfono.");
                 return false;
             }
+
             if (datosPedido.deliveryType === "delivery") {
                 if (!datosPedido.receiver) {
                     Swal.showValidationMessage("Escribe el nombre de quien recibe.");
@@ -687,7 +761,7 @@ async function openOrderForm() {
     }, 300);
 }
 
-/* ========= WHATSAPP ========= */
+/* WHATSAPP */
 function buildWhatsAppMessage() {
     const lines = [];
     lines.push(`Hola! Quiero pedir en ${CONFIG.BUSINESS_NAME}`);
@@ -708,7 +782,11 @@ function buildWhatsAppMessage() {
     for (const item of carrito.values()) {
         const producto = obtenerProducto(item.id);
         if (!producto) continue;
-        lines.push(`- ${item.qty} x ${producto.title} • ${etiquetaTamano(item.size)} (${formatearCLP(producto.price)})`);
+
+        const unit = precioPorSize(producto, item.size);
+        lines.push(
+            `- ${item.qty} x ${producto.title} • ${etiquetaTamano(item.size, producto)} (Unit: ${formatearCLP(unit)})`
+        );
     }
 
     lines.push("");
@@ -738,21 +816,10 @@ function openWhatsApp(withCart) {
     window.open(`https://wa.me/${phone}?text=${msg}`, "_blank");
 }
 
-/* ========= BOTONES ========= */
+/* BOTONES (solo del carrito) */
 function wireButtons() {
-    // ✅ Tu HTML nuevo usa #btnCartTop (abre offcanvas por data-bs-toggle)
-    const btnCartTop = seleccionar("#btnCartTop");
     const send = seleccionar("#btnSendOrder");
     const clear = seleccionar("#btnClearCart");
-
-    // Solo por si quieres que al tocar el botón del carrito, si está vacío, igual abra (bootstrap ya lo abre)
-    if (btnCartTop) {
-        btnCartTop.addEventListener("click", () => {
-            // No hacemos nada: Bootstrap Offcanvas lo maneja
-            // Pero actualizamos badge por si acaso
-            updateCartBadge();
-        });
-    }
 
     if (send) {
         send.addEventListener("click", async () => {
@@ -797,7 +864,7 @@ function wireButtons() {
     }
 }
 
-/* ========= MODAL IMAGEN ========= */
+/* MODAL IMAGEN */
 function wireImageModal() {
     const modalEl = document.getElementById("imageModal");
     if (!modalEl || typeof bootstrap === "undefined") return;
@@ -820,7 +887,7 @@ function wireImageModal() {
     });
 }
 
-/* ========= FILTROS ========= */
+/* FILTROS */
 function applyCategory(cat, doScroll = false) {
     categoriaActual = cat;
     actualizarUIcategoria(cat);
@@ -845,7 +912,7 @@ function wireCategoryFilters() {
     actualizarUIcategoria(categoriaActual);
 }
 
-/* ========= EXPLOSIÓN ========= */
+/* EXPLOSIÓN */
 function triggerFestinExplosion() {
     const burst = document.createElement("div");
     burst.className = "festin-burst";
@@ -883,7 +950,7 @@ function triggerFestinExplosion() {
     setTimeout(() => burst.remove(), 1900);
 }
 
-/* ========= FESTÍN ========= */
+/* FESTÍN */
 function ensureSiteContentWrapper(festinEl) {
     let app = document.getElementById("siteContent");
     if (app) return app;
@@ -950,7 +1017,7 @@ function initFestin() {
     });
 }
 
-/* ========= INIT ========= */
+/* INIT */
 document.addEventListener("DOMContentLoaded", () => {
     initFestin();
 
