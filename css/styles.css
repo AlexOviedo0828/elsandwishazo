@@ -173,45 +173,58 @@ body{
     radial-gradient(700px 300px at 80% 20%, rgba(255,0,0,0.12), transparent);
 }
 
-/* ===============================
-   CAROUSEL PRO
-================================ */
-.carousel-section{ width: 100%; }
+/* =========================================
+   CAROUSEL: más pro y más pequeño (override)
+   Pegar AL FINAL del styles.css
+========================================= */
+
+/* Contenedor del carrusel */
 .pro-carousel{
   width: 100%;
-  border-radius: 22px;
+  max-width: 1100px;      /* 🔥 más compacto */
+  margin: 0 auto;         /* centrado */
+  border-radius: 26px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.12);
-  box-shadow: 0 18px 45px rgba(0,0,0,0.6);
+  border: 1px solid rgba(6, 6, 6, 0.12);
+  box-shadow: 0 25px 60px rgba(74, 255, 2, 0.65);
   position: relative;
 }
-.pro-carousel::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background: radial-gradient(80% 60% at 50% 30%, rgba(255,193,7,0.10), transparent 60%);
-}
+
+/* Imágenes y videos del carrusel */
 .carousel-img{
-  height: 360px;
+  height: clamp(200px, 32vw, 360px);  /* ✅ más bajo y adaptable */
   object-fit: cover;
-}
-.carousel-indicators [data-bs-target]{
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-}
-.carousel-control-prev-icon,
-.carousel-control-next-icon{
-  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.65));
+  object-position: center;
 }
 
-/* ✅ IMPORTANTE: evita que los botones del carousel “molesten” en móvil cuando hay overlays */
+/* Si quieres que el carrusel sea aún más “corto” en PC */
+@media (min-width: 1200px){
+  .carousel-img{
+    height: 320px;
+  }
+}
+
+/* Ajustes móvil */
+@media (max-width: 576px){
+  .pro-carousel{
+    border-radius: 14px;
+  }
+  .carousel-img{
+    height: 210px;            /* ✅ más compacto */
+    object-position: center;
+  }
+}
+
+/* Controles más discretos */
 .carousel-control-prev,
 .carousel-control-next{
-  width: 14%;
+  width: 10%;
+  opacity: .85;
 }
-
+.carousel-control-prev:hover,
+.carousel-control-next:hover{
+  opacity: 1;
+}
 /* ===============================
    GRID MENÚ
 ================================ */
